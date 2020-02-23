@@ -37,3 +37,8 @@ RUN apt-get -y install r-base r-base-dev
 # R general packages
 RUN R -e "install.packages (c('tidyverse', 'tidylog', 'readr', 'dplyr', 'knitr', 'printr', 'rmarkdown', 'shiny', 'ggplot2', 'gplots', 'reshape2', 'data.table', 'readxl', 'devtools', 'cowplot', 'tictoc', 'ggpubr'))"
 
+# R bio package
+RUN R -e "install.packages (c('BiocManager', 'vegan'))"
+RUN R -e "BiocManager::install(c('DESeq2', 'edgeR', 'dada2', 'phyloseq', 'metagenomeSeq'), ask = FALSE, update = TRUE)"
+RUN R -e "update.packages(ask = FALSE)"
+
