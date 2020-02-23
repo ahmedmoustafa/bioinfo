@@ -25,10 +25,15 @@ RUN apt-get -y install bc
 RUN apt-get -y install screen
 RUN apt-get -y install aptitude
 RUN apt-get -y install default-jre default-jdk
+RUN apt-get -y install libssl-dev libcurl4-openssl-dev
+RUN apt-get -y install libxml2-dev
 
 # R
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
 RUN apt-get update
 RUN apt-get -y install r-base r-base-dev
+
+# R general packages
+RUN R -e "install.packages (c('tidyverse', 'tidylog', 'readr', 'dplyr', 'knitr', 'printr', 'rmarkdown', 'shiny', 'ggplot2', 'gplots', 'reshape2', 'data.table', 'readxl', 'devtools', 'cowplot', 'tictoc', 'ggpubr'))"
 
