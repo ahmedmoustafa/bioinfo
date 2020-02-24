@@ -3,6 +3,8 @@ FROM ubuntu:18.04
 LABEL description="Bioinformatics Docker Container"
 LABEL maintainer="amoustafa@aucegypt.edu"
 
+WORKDIR /root/
+
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update
@@ -49,4 +51,3 @@ RUN R -e "update.packages(ask = FALSE)"
 # Sequence search
 RUN apt-get -y install ncbi-blast+
 
-RUN cd /root/
