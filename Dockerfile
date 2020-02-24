@@ -42,3 +42,6 @@ RUN R -e "install.packages (c('BiocManager', 'vegan'))"
 RUN R -e "BiocManager::install(c('DESeq2', 'edgeR', 'dada2', 'phyloseq', 'metagenomeSeq'), ask = FALSE, update = TRUE)"
 RUN R -e "update.packages(ask = FALSE)"
 
+# Bioinformatics tools
+# Sequence search
+RUN apt-get -y install ncbi-blast+
