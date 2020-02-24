@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:18.04
 
 LABEL description="Bioinformatics Docker Container"
 LABEL maintainer="amoustafa@aucegypt.edu"
@@ -48,3 +48,5 @@ RUN R -e "update.packages(ask = FALSE)"
 # Bioinformatics tools
 # Sequence search
 RUN apt-get -y install ncbi-blast+
+
+RUN cd /root/
