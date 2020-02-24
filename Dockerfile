@@ -1,5 +1,8 @@
 FROM ubuntu
 
+LABEL description="Bioinformatics Docker Container"
+LABEL maintainer="amoustafa@aucegypt.edu"
+
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update
