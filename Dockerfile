@@ -50,4 +50,4 @@ RUN R -e "update.packages(ask = FALSE)"
 # Bioinformatics tools
 # Sequence search
 RUN apt-get -y install ncbi-blast+
-
+RUN apt-get -y install hmmer
