@@ -55,14 +55,14 @@ RUN apt-get -y install hmmer
 
 # Diamond
 # #######
-git clone https://github.com/bbuchfink/diamond.git
-cd diamond/
-mkdir bin
-cd bin
-cmake ..
-make install
-which diamond
-diamond --version
-cd ../../
-rm -fr diamond
+RUN git clone https://github.com/bbuchfink/diamond.git
+RUN cd diamond/
+RUN mkdir bin
+RUN cd bin
+RUN cmake ..
+RUN make install
+RUN which diamond
+RUN diamond --version
+RUN cd ../../
+RUN rm -fr diamond
 
