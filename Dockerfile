@@ -32,6 +32,7 @@ RUN apt-get -y install aptitude
 RUN apt-get -y install default-jre default-jdk
 RUN apt-get -y install libssl-dev libcurl4-openssl-dev
 RUN apt-get -y install libxml2-dev
+RUN apt-get -y install autoconf cmake
 
 # R
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -51,3 +52,17 @@ RUN R -e "update.packages(ask = FALSE)"
 # Sequence search
 RUN apt-get -y install ncbi-blast+
 RUN apt-get -y install hmmer
+
+# Diamond
+# #######
+git clone https://github.com/bbuchfink/diamond.git
+cd diamond/
+mkdir bin
+cd bin
+cmake ..
+make install
+which diamond
+diamond --version
+cd ../../
+rm -fr diamond
+
