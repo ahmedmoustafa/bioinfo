@@ -56,65 +56,65 @@ RUN apt-get -y install hmmer
 # Diamond
 # #######
 RUN git clone https://github.com/bbuchfink/diamond.git
-RUN WORKDIR /root/diamond/
+WORKDIR /root/diamond/
 RUN mkdir bin
-RUN WORKDIR /root/diamon/bin
+WORKDIR /root/diamon/bin
 RUN cmake ..
 RUN make install
 RUN which diamond
 RUN diamond --version
-RUN WORKDIR /root/
+WORKDIR /root/
 RUN rm -fr diamond
 
 
 # NCBI NGS Language Bindings
 # ##########################
 RUN git clone https://github.com/ncbi/ngs.git
-RUN WORKDIR /root/ngs/
+WORKDIR /root/ngs/
 RUN ./configure
 RUN make
 RUN make install
-RUN WORKDIR /root/ngs/ngs-python
+WORKDIR /root/ngs/ngs-python
 RUN ./configure
 RUN make
 RUN make install
-RUN WORKDIR /root/ngs/ngs-sdk
+WORKDIR /root/ngs/ngs-sdk
 RUN ./configure
 RUN make
 RUN make install
-RUN /root/
+WORKDIR /root/
 RUN rm -fr ngs
 
 
 # NCBI NGS Tools
 # ##############
 RUN git clone https://github.com/ncbi/ngs-tools.git
-RUN WORKDIR /root/ngs-tools/
+WORKDIR /root/ngs-tools/
 RUN ./configure
 RUN make
 RUN make install
-RUN WORKDIR /root/
+WORKDIR /root/
 RUN rm -fr ngs-tools
 
 
 # NCBI SRA
 # ########
 RUN git clone https://github.com/ncbi/ncbi-vdb.git
-RUN WORKDIR /root/ncbi-vdb
+WORKDIR /root/ncbi-vdb
 RUN ./configure
 RUN make
 RUN make install
-RUN WORKDIR /root/
+WORKDIR /root/
 RUN rm -fr ncbi-vdb
 
 
 # NCBI SRA-Tools
 # ##############
 RUN git clone https://github.com/ncbi/sra-tools.git
-RUN WORKDIR /root/sra-tools
+WORKDIR /root/sra-tools
 RUN ./configure
 RUN make
 RUN make install
-RUN WORKDIR /root/
+WORKDIR /root/
 RUN rm -fr sra-tools
 
