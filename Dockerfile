@@ -66,3 +66,56 @@ RUN diamond --version
 RUN cd ../../
 RUN rm -fr diamond
 
+
+# NCBI NGS Language Bindings
+# ##########################
+RUN git clone https://github.com/ncbi/ngs.git
+RUN cd ngs
+RUN ./configure
+RUN make
+RUN make install
+RUN cd ngs-python
+RUN ./configure
+RUN make
+RUN make install
+RUN cd ..
+RUN cd ngs-sdk
+RUN ./configure
+RUN make
+RUN make install
+RUN cd ..
+RUN rm -fr ngs
+
+
+# NCBI NGS Tools
+# ##############
+RUN git clone https://github.com/ncbi/ngs-tools.git
+RUN cd ngs-tools
+RUN ./configure
+RUN make
+RUN make install
+RUN cd ..
+RUN rm -fr ngs-tools
+
+
+# NCBI SRA
+# ########
+RUN git clone https://github.com/ncbi/ncbi-vdb.git
+RUN cd ncbi-vdb
+RUN ./configure
+RUN make
+RUN make install
+RUN cd ..
+RUN rm -fr ncbi-vdb
+
+
+# NCBI SRA-Tools
+# ##############
+RUN git clone https://github.com/ncbi/sra-tools.git
+RUN cd sra-tools
+RUN ./configure
+RUN make
+RUN make install
+RUN cd ..
+RUN rm -fr sra-tools
+
