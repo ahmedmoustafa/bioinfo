@@ -19,6 +19,7 @@ RUN apt-get -y upgrade
 
 RUN apt-get -y install vim nano emacs
 RUN apt-get -y install curl wget
+RUN apt-get -y install build-essential libtool libboost-all-dev autotools-dev automake autoconf
 RUN apt-get -y install htop parallel
 RUN apt-get -y install gnupg
 RUN apt-get -y install lsof
@@ -30,9 +31,14 @@ RUN apt-get -y install bc
 RUN apt-get -y install screen
 RUN apt-get -y install aptitude
 RUN apt-get -y install default-jre default-jdk
+RUN apt-get -y install ant
 RUN apt-get -y install libssl-dev libcurl4-openssl-dev
 RUN apt-get -y install libxml2-dev
 RUN apt-get -y install autoconf cmake
+RUN apt-get -y install libmagic-dev \
+hdf5-* libhdf5-* \
+fuse libfuse-dev \
+libtbb-dev
 
 # R
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -58,7 +64,7 @@ RUN apt-get -y install hmmer
 RUN git clone https://github.com/bbuchfink/diamond.git
 WORKDIR /root/diamond/
 RUN mkdir bin
-WORKDIR /root/diamon/bin
+WORKDIR /root/diamond/bin/
 RUN cmake ..
 RUN make install
 RUN which diamond
@@ -67,54 +73,59 @@ WORKDIR /root/
 RUN rm -fr diamond
 
 
-# NCBI NGS Language Bindings
-# ##########################
+# NCBI Tools
+# ##########
+RUN mkdir ncbi
+WORKDIR /root/ncbi
+
 RUN git clone https://github.com/ncbi/ngs.git
-WORKDIR /root/ngs/
-RUN ./configure
-RUN make
-RUN make install
-WORKDIR /root/ngs/ngs-python
-RUN ./configure
-RUN make
-RUN make install
-WORKDIR /root/ngs/ngs-sdk
-RUN ./configure
-RUN make
-RUN make install
-WORKDIR /root/
-RUN rm -fr ngs
-
-
-# NCBI NGS Tools
-# ##############
-RUN git clone https://github.com/ncbi/ngs-tools.git
-WORKDIR /root/ngs-tools/
-RUN ./configure
-RUN make
-RUN make install
-WORKDIR /root/
-RUN rm -fr ngs-tools
-
-
-# NCBI SRA
-# ########
 RUN git clone https://github.com/ncbi/ncbi-vdb.git
-WORKDIR /root/ncbi-vdb
-RUN ./configure
-RUN make
-RUN make install
-WORKDIR /root/
-RUN rm -fr ncbi-vdb
-
-
-# NCBI SRA-Tools
-# ##############
+RUN git clone https://github.com/ncbi/ngs-tools.git
 RUN git clone https://github.com/ncbi/sra-tools.git
-WORKDIR /root/sra-tools
+
+
+WORKDIR /root/ncbi/ncbi-vdb
 RUN ./configure
 RUN make
 RUN make install
-WORKDIR /root/
-RUN rm -fr sra-tools
 
+WORKDIR /root/ncbi/ngs
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /root/ncbi/ngs/ngs-sdk
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /root/ncbi/ngs/ngs-python
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /root/ncbi/ngs/ngs-java
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /root/ncbi/ngs/ngs-bam
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /root/ncbi/ngs-tools
+RUN ./configure
+RUN make
+RUN make install
+
+WORKDIR /root/ncbi/sra-tools
+RUN ./configure
+RUN make
+RUN make install
+
+
+WORKDIR /root/
+RUN blastn -version
+RUN diamond --version
+RUN R --version
