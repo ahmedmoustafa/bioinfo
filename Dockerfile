@@ -122,7 +122,17 @@ RUN make
 RUN make install
 
 
+# CD-HIT
+# ######
+RUN git clone https://github.com/weizhongli/cdhit.git
+WORKDIR /root/cdhit
+RUN make
+RUN make install
+
+
 WORKDIR /root/
+
 RUN blastn -version
 # RUN diamond --version
 RUN R --version
+RUN cd-hit
