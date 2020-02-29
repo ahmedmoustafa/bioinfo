@@ -16,6 +16,11 @@ The list of the installed tools and packages can be found [here](Tools.md)
 `sudo docker run -it bioinfo /bin/bash`
 
 ### Option 2: Pulling from Docker Hub
+
+[Docker Hub](https://hub.docker.com/) automatically and elegantly [builds images](https://hub.docker.com/repository/docker/cairogenes/bioinfo) for changes to the GitHub repository.
+
+The built images can be downloaded as follows:
+
 `docker pull cairogenes/bioinfo`
 
 `sudo docker run -it cairogenes/bioinfo /bin/bash`

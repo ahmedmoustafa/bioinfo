@@ -36,7 +36,7 @@ RUN apt-get -y install libssl-dev libcurl4-openssl-dev
 RUN apt-get -y install libxml2-dev
 RUN apt-get -y install autoconf cmake
 RUN apt-get -y install libmagic-dev \
-hdf5-* libhdf5-* \
+libhdf5-dev \
 fuse libfuse-dev \
 libtbb-dev
 
@@ -56,21 +56,18 @@ RUN R -e "update.packages(ask = FALSE)"
 
 # Bioinformatics tools
 # Sequence search
-RUN apt-get -y install ncbi-blast+
-RUN apt-get -y install hmmer
+RUN apt-get -y install \
+ncbi-blast+ \
+hmmer
 
 # Diamond
 # #######
-RUN git clone https://github.com/bbuchfink/diamond.git
-WORKDIR /root/diamond/
-RUN mkdir bin
-WORKDIR /root/diamond/bin/
-RUN cmake ..
-RUN make install
-RUN which diamond
-RUN diamond --version
-WORKDIR /root/
-RUN rm -fr diamond
+# RUN git clone https://github.com/bbuchfink/diamond.git
+# WORKDIR /root/diamond/
+# RUN mkdir bin
+# WORKDIR /root/diamond/bin/
+# RUN cmake ..
+# RUN make install
 
 
 # NCBI Tools
