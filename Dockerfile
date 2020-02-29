@@ -135,4 +135,4 @@ WORKDIR /root/
 RUN blastn -version
 # RUN diamond --version
 RUN R --version
-RUN cd-hit
+
