@@ -124,5 +124,5 @@ RUN make install
 
 WORKDIR /root/
 RUN blastn -version
-RUN diamond --version
+# RUN diamond --version
 RUN R --version
