@@ -149,7 +149,7 @@ RUN make
 RUN mv muscle /usr/local/bin/
 
 # MAFFT
-#######
+# #####
 WORKDIR /root/
 RUN wget -t 0 https://mafft.cbrc.jp/alignment/software/mafft-7.453-with-extensions-src.tgz
 RUN tar zxvf mafft-7.453-with-extensions-src.tgz
@@ -171,7 +171,7 @@ RUN make
 RUN mv bwa /usr/local/bin/
 
 # TopHat
-########
+# ######
 # (It does not complile)
 WORKDIR /root/
 RUN wget -t 0 https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz
@@ -179,6 +179,14 @@ RUN tar zxvf tophat-2.1.1.Linux_x86_64.tar.gz
 WORKDIR /root/tophat-2.1.1.Linux_x86_64
 RUN mv tophat* /usr/local/bin/
 
+# HISAT2
+# ######
+WORKDIR /root/
+RUN git clone https://github.com/infphilo/hisat2.git
+WORKDIR /root/hisat2
+RUN make
+RUN mv hisat2-* /usr/local/bin/
+RUN mv hisat2 /usr/local/bin/
 
 
 WORKDIR /root/
@@ -189,3 +197,4 @@ RUN R --version
 RUN muscle -version
 RUN mafft --version
 RUN tophat --version
+RUN hisat2 --version
