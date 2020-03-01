@@ -8,3 +8,4 @@
 | [MUSCLE](https://www.drive5.com/muscle/) | [MUSCLE: multiple sequence alignment with high accuracy and high throughput](https://www.ncbi.nlm.nih.gov/pubmed/15034147) |
 | [MAFFT](https://mafft.cbrc.jp/alignment/software/) | [MAFFT: a novel method for rapid multiple sequence alignment based on fast Fourier transform](https://www.ncbi.nlm.nih.gov/pubmed/12136088) |
 | [JAligner](https://github.com/ahmedmoustafa/JAligner) | [JAligner is an open-source Java implementation of the Needleman–Wunsch and Smith-Waterman algorithms for biological pairwise sequence alignment with the affine gap penalty model](http://jaligner.sourceforge.net/) |
+| [BWA](https://github.com/lh3/bwa) | [Fast and accurate short read alignment with Burrows–Wheeler transform](https://www.ncbi.nlm.nih.gov/pubmed/19451168) |

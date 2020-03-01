@@ -135,6 +135,10 @@ WORKDIR /root/
 # Alignment Tools
 # ###############
 
+# JAligner
+# ########
+RUN apt-get -y install jaligner
+
 # MUSCLE
 # ######
 WORKDIR /root/
@@ -158,10 +162,13 @@ RUN make clean
 RUN make
 RUN make install
 
-# JAligner
-# ########
-RUN apt-get -y install jaligner
-
+# BWA
+# ###
+WORKDIR /root/
+RUN git clone https://github.com/lh3/bwa.git
+WORKDIR /root/bwa
+RUN make
+RUN mv bwa /usr/local/bin/
 
 
 
@@ -172,3 +179,4 @@ RUN blastn -version
 RUN R --version
 RUN muscle -version
 RUN mafft --version
+RUN bwa
