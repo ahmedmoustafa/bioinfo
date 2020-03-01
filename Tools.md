@@ -6,3 +6,4 @@
 | [HMMER](http://hmmer.org/) | biosequence analysis using profile hidden Markov models |
 | [CD-HIT](http://weizhongli-lab.org/cd-hit/)  | [CD-HIT: a fast program for clustering and comparing large sets of protein or nucleotide sequences](https://www.ncbi.nlm.nih.gov/pubmed/16731699)  |
 | [MUSCLE](https://www.drive5.com/muscle/) | [MUSCLE: multiple sequence alignment with high accuracy and high throughput](https://www.ncbi.nlm.nih.gov/pubmed/15034147) |
+| [MAFFT](https://mafft.cbrc.jp/alignment/software/) | [MAFFT: a novel method for rapid multiple sequence alignment based on fast Fourier transform](https://www.ncbi.nlm.nih.gov/pubmed/12136088) |

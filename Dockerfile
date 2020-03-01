@@ -137,15 +137,27 @@ WORKDIR /root/
 
 # MUSCLE
 # ######
+WORKDIR /root/
 RUN wget -t 0 https://www.drive5.com/muscle/downloads3.8.31/muscle3.8.31_src.tar.gz
 RUN tar zxvf muscle3.8.31_src.tar.gz
 WORKDIR /root/muscle3.8.31/src
 RUN make
 RUN mv muscle /usr/local/bin/
 
+# MAFFT
+#######
+WORKDIR /root/
+RUN wget -t 0 https://mafft.cbrc.jp/alignment/software/mafft-7.453-with-extensions-src.tgz
+RUN tar zxvf mafft-7.453-with-extensions-src.tgz
+WORKDIR /root/mafft-7.453-with-extensions/core
+RUN make clean
+RUN make
+RUN make install
 
-
-
+WORKDIR /root/mafft-7.453-with-extensions/extensions/
+RUN make clean
+RUN make
+RUN make install
 
 
 WORKDIR /root/
@@ -154,3 +166,4 @@ RUN blastn -version
 # RUN diamond --version
 RUN R --version
 RUN muscle -version
+RUN mafft --version
