@@ -198,6 +198,16 @@ RUN make
 RUN make install
 
 
+# STAR
+# ####
+WORKDIR /root/
+RUN git clone https://github.com/alexdobin/STAR.git
+WORKDIR /root/STAR/source
+make STAR
+RUN mv STAR /usr/local/bin/
+
+
+
 WORKDIR /root/
 
 RUN blastn -version
@@ -208,3 +218,4 @@ RUN mafft --version
 RUN tophat --version
 RUN hisat2 --version
 RUN bowtie2 --version
+RUN STAR --version
