@@ -170,6 +170,15 @@ WORKDIR /root/bwa
 RUN make
 RUN mv bwa /usr/local/bin/
 
+# TopHat
+########
+# (It does not complile)
+WORKDIR /root/
+RUN wget -t 0 https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz
+RUN tar zxvf tophat-2.1.1.Linux_x86_64.tar.gz
+WORKDIR /root/tophat-2.1.1.Linux_x86_64
+RUN mv tophat* /usr/local/bin/
+
 
 
 WORKDIR /root/
@@ -179,4 +188,4 @@ RUN blastn -version
 RUN R --version
 RUN muscle -version
 RUN mafft --version
-RUN bwa
+RUN tophat --version
