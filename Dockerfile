@@ -153,11 +153,16 @@ WORKDIR /root/mafft-7.453-with-extensions/core
 RUN make clean
 RUN make
 RUN make install
-
 WORKDIR /root/mafft-7.453-with-extensions/extensions/
 RUN make clean
 RUN make
 RUN make install
+
+# JAligner
+# ########
+RUN apt-get -y install jaligner
+
+
 
 
 WORKDIR /root/
