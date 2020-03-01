@@ -34,11 +34,20 @@ RUN apt-get -y install default-jre default-jdk
 RUN apt-get -y install ant
 RUN apt-get -y install libssl-dev libcurl4-openssl-dev
 RUN apt-get -y install libxml2-dev
-RUN apt-get -y install autoconf cmake
 RUN apt-get -y install libmagic-dev \
 libhdf5-dev \
 fuse libfuse-dev \
 libtbb-dev
+
+
+WORKDIR /root/
+RUN wget -t 0 https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4.tar.gz
+RUN tar zxvf cmake-3.16.4.tar.gz
+WORKDIR /root/cmake-3.16.4
+RUN ./configure
+RUN make
+RUN make install
+
 
 # R
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
@@ -203,9 +212,22 @@ RUN make install
 WORKDIR /root/
 RUN git clone https://github.com/alexdobin/STAR.git
 WORKDIR /root/STAR/source
-make STAR
+RUN make STAR
 RUN mv STAR /usr/local/bin/
 
+# Salmon
+# ######
+WORKDIR /root/
+RUN git clone https://github.com/COMBINE-lab/salmon.git
+WORKDIR /root/salmon
+RUN mkdir build
+WORKDIR /root/salmon/build
+RUN cmake ..
+RUN make
+RUN make install
+RUN make test
+RUN mv /root/salmon/bin/* /usr/local/bin/
+RUN mv /root/salmon/lib/* /usr/local/lib/
 
 
 WORKDIR /root/
@@ -219,3 +241,4 @@ RUN tophat --version
 RUN hisat2 --version
 RUN bowtie2 --version
 RUN STAR --version
+RUN salmon --version
