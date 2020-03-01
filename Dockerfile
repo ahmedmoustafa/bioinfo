@@ -132,7 +132,25 @@ RUN make install
 
 WORKDIR /root/
 
+# Alignment Tools
+# ###############
+
+# MUSCLE
+# ######
+RUN wget -t 0 https://www.drive5.com/muscle/downloads3.8.31/muscle3.8.31_src.tar.gz
+RUN tar zxvf muscle3.8.31_src.tar.gz
+WORKDIR /root/muscle3.8.31/src
+RUN make
+RUN mv muscle /usr/local/bin/
+
+
+
+
+
+
+WORKDIR /root/
+
 RUN blastn -version
 # RUN diamond --version
 RUN R --version
-
+RUN muscle -version
