@@ -11,3 +11,4 @@
 | [BWA](https://github.com/lh3/bwa) | [Fast and accurate short read alignment with Burrows–Wheeler transform](https://www.ncbi.nlm.nih.gov/pubmed/19451168) |
 | [TopHat](https://ccb.jhu.edu/software/tophat/) | [Ultrafast and memory-efficient alignment of short DNA sequences to the human genome](https://www.ncbi.nlm.nih.gov/pubmed/19261174)<br>[TopHat2: accurate alignment of transcriptomes in the presence of insertions, deletions and gene fusions](https://www.ncbi.nlm.nih.gov/pubmed/23618408) |
 | [HISAT2](http://daehwankimlab.github.io/hisat2/) | [Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype](https://www.ncbi.nlm.nih.gov/pubmed/31375807) |
+| [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/) | [Fast gapped-read alignment with Bowtie 2](https://www.ncbi.nlm.nih.gov/pubmed/22388286) |

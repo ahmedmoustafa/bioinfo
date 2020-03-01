@@ -189,6 +189,15 @@ RUN mv hisat2-* /usr/local/bin/
 RUN mv hisat2 /usr/local/bin/
 
 
+# Bowtie2
+# ######
+WORKDIR /root/
+RUN  git clone https://github.com/BenLangmead/bowtie2.git
+WORKDIR /root/bowtie2/
+RUN make
+RUN make install
+
+
 WORKDIR /root/
 
 RUN blastn -version
@@ -198,3 +207,4 @@ RUN muscle -version
 RUN mafft --version
 RUN tophat --version
 RUN hisat2 --version
+RUN bowtie2 --version
