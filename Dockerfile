@@ -180,7 +180,7 @@ WORKDIR /root/
 # ################
 
 RUN blastn -version
-# RUN diamond --version
+RUN diamond --version
 RUN R --version
 RUN muscle -version
 RUN mafft --version
@@ -188,4 +188,4 @@ RUN tophat --version
 RUN hisat2 --version
 RUN bowtie2 --version
 RUN STAR --version
-RUN salmon --version
+
