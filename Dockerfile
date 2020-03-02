@@ -193,7 +193,7 @@ RUN mv bwa /usr/local/bin/
 
 # TopHat
 # ######
-# (It does not complile)
+# (It does not compile)
 WORKDIR /root/
 RUN wget -t 0 https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz
 RUN tar zxvf tophat-2.1.1.Linux_x86_64.tar.gz
@@ -240,6 +240,23 @@ RUN make install
 RUN make test
 RUN mv /root/salmon/bin/* /usr/local/bin/
 RUN mv /root/salmon/lib/* /usr/local/lib/
+
+
+# kallisto
+# ########
+WORKDIR /root/
+RUN git clone https://github.com/pachterlab/kallisto.git
+WORKDIR /root/kallisto/ext/htslib
+RUN autoheader
+RUN autoconf
+WORKDIR /root/kallisto/
+RUN mkdir build
+WORKDIR /root/kallisto/build
+RUN cmake ..
+RUN make
+RUN make install
+RUN R -e "BiocManager::install('pachterlab/sleuth', ask = FALSE, update = TRUE)"
+
 
 
 WORKDIR /root/

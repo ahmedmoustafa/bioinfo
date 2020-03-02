@@ -14,3 +14,4 @@
 | [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/) | [Fast gapped-read alignment with Bowtie 2](https://www.ncbi.nlm.nih.gov/pubmed/22388286) |
 | [STAR](https://github.com/alexdobin/STAR) | [STAR: ultrafast universal RNA-seq aligner](https://www.ncbi.nlm.nih.gov/pubmed/23104886) |
 | [Salmon](https://combine-lab.github.io/salmon/) | [Alignment and mapping methodology influence transcript abundance estimation](https://doi.org/10.1101/657874) |
+| [kallisto](https://pachterlab.github.io/kallisto/) | [Near-optimal probabilistic RNA-seq quantification](https://www.ncbi.nlm.nih.gov/pubmed/27043002) |
