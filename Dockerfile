@@ -49,26 +49,6 @@ RUN make
 RUN make install
 
 
-# R
-# #
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-RUN add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/'
-RUN apt-get update
-RUN apt-get -y install r-base r-base-dev
-
-# R general packages
-# ##################
-RUN R -e "install.packages (c('tidyverse', 'tidylog', 'readr', 'dplyr', 'knitr', 'printr', 'rmarkdown', 'shiny', 'ggplot2', 'gplots', 'reshape2', 'data.table', 'readxl', 'devtools', 'cowplot', 'tictoc', 'ggpubr', 'patchwork'))"
-
-# R bio package
-# #############
-RUN R -e "install.packages (c('BiocManager', 'vegan'))"
-RUN R -e "BiocManager::install(c('DESeq2', 'edgeR', 'dada2', 'phyloseq', 'metagenomeSeq'), ask = FALSE, update = TRUE)"
-RUN R -e "update.packages(ask = FALSE)"
-
-# Bioinformatics Tools
-# ####################
-
 # Sequence search
 # ###############
 # ###############
@@ -81,111 +61,64 @@ hmmer
 
 # Diamond
 # #######
-WORKDIR /root/
-RUN git clone https://github.com/bbuchfink/diamond.git
-WORKDIR /root/diamond/
-RUN mkdir bin
-WORKDIR /root/diamond/bin/
-RUN cmake ..
-RUN make install
+# RUN git clone https://github.com/bbuchfink/diamond.git
+# WORKDIR /root/diamond/
+# RUN mkdir bin
+# WORKDIR /root/diamond/bin/
+# RUN cmake ..
+# RUN make install
 
 
-# CD-HIT
-# ######
+# NCBI Tools
+# ##########
 WORKDIR /root/
-RUN git clone https://github.com/weizhongli/cdhit.git
-WORKDIR /root/cdhit/
+RUN mkdir ncbi
+WORKDIR /root/ncbi
+
+RUN git clone https://github.com/ncbi/ngs.git
+RUN git clone https://github.com/ncbi/ncbi-vdb.git
+RUN git clone https://github.com/ncbi/ngs-tools.git
+RUN git clone https://github.com/ncbi/sra-tools.git
+
+
+WORKDIR /root/ncbi/ncbi-vdb
+RUN ./configure
 RUN make
 RUN make install
 
-# Alignment Tools
-# ###############
-# ###############
-
-# JAligner
-# ########
-RUN apt-get -y install jaligner
-
-# MUSCLE
-# ######
-WORKDIR /root/
-RUN wget -t 0 https://www.drive5.com/muscle/downloads3.8.31/muscle3.8.31_src.tar.gz
-RUN tar zxvf muscle3.8.31_src.tar.gz
-WORKDIR /root/muscle3.8.31/src
-RUN make
-RUN mv muscle /usr/local/bin/
-
-# MAFFT
-# #####
-WORKDIR /root/
-RUN wget -t 0 https://mafft.cbrc.jp/alignment/software/mafft-7.453-with-extensions-src.tgz
-RUN tar zxvf mafft-7.453-with-extensions-src.tgz
-WORKDIR /root/mafft-7.453-with-extensions/core
-RUN make clean
-RUN make
-RUN make install
-WORKDIR /root/mafft-7.453-with-extensions/extensions/
-RUN make clean
+WORKDIR /root/ncbi/ngs
+RUN ./configure
 RUN make
 RUN make install
 
-# BWA
-# ###
-WORKDIR /root/
-RUN git clone https://github.com/lh3/bwa.git
-WORKDIR /root/bwa
-RUN make
-RUN mv bwa /usr/local/bin/
-
-# TopHat
-# ######
-# (It does not compile)
-WORKDIR /root/
-RUN wget -t 0 https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz
-RUN tar zxvf tophat-2.1.1.Linux_x86_64.tar.gz
-WORKDIR /root/tophat-2.1.1.Linux_x86_64
-RUN mv tophat* /usr/local/bin/
-
-# HISAT2
-# ######
-WORKDIR /root/
-RUN git clone https://github.com/infphilo/hisat2.git
-WORKDIR /root/hisat2
-RUN make
-RUN mv hisat2-* /usr/local/bin/
-RUN mv hisat2 /usr/local/bin/
-
-
-# Bowtie2
-# ######
-WORKDIR /root/
-RUN  git clone https://github.com/BenLangmead/bowtie2.git
-WORKDIR /root/bowtie2/
+WORKDIR /root/ncbi/ngs/ngs-sdk
+RUN ./configure
 RUN make
 RUN make install
 
+WORKDIR /root/ncbi/ngs/ngs-python
+RUN ./configure
+RUN make
+RUN make install
 
-# STAR
-# ####
-WORKDIR /root/
-RUN git clone https://github.com/alexdobin/STAR.git
-WORKDIR /root/STAR/source
-RUN make STAR
-RUN mv STAR /usr/local/bin/
+WORKDIR /root/ncbi/ngs/ngs-java
+RUN ./configure
+RUN make
+RUN make install
 
+WORKDIR /root/ncbi/ngs/ngs-bam
+RUN ./configure
+RUN make
+RUN make install
 
-WORKDIR /root/
+WORKDIR /root/ncbi/ngs-tools
+RUN ./configure
+RUN make
+RUN make install
 
-# Showing versions
-# ################
+WORKDIR /root/ncbi/sra-tools
+RUN ./configure
+RUN make
+RUN make install
 
-RUN blastn -version
-RUN diamond --version
-RUN R --version
-RUN muscle -version
-RUN mafft --version
-RUN tophat --version
-RUN hisat2 --version
-RUN bowtie2 --version
-RUN STAR --version
 
