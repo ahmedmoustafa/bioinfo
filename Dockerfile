@@ -156,3 +156,47 @@ RUN make clean
 RUN make
 RUN make install
 
+# BWA
+# ###
+WORKDIR /root/
+RUN git clone https://github.com/lh3/bwa.git
+WORKDIR /root/bwa
+RUN make
+RUN mv bwa /usr/local/bin/
+
+# TopHat
+# ######
+# (It does not compile)
+WORKDIR /root/
+RUN wget -t 0 https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz
+RUN tar zxvf tophat-2.1.1.Linux_x86_64.tar.gz
+WORKDIR /root/tophat-2.1.1.Linux_x86_64
+RUN mv tophat* /usr/local/bin/
+
+# HISAT2
+# ######
+WORKDIR /root/
+RUN git clone https://github.com/infphilo/hisat2.git
+WORKDIR /root/hisat2
+RUN make
+RUN mv hisat2-* /usr/local/bin/
+RUN mv hisat2 /usr/local/bin/
+
+
+# Bowtie2
+# ######
+WORKDIR /root/
+RUN  git clone https://github.com/BenLangmead/bowtie2.git
+WORKDIR /root/bowtie2/
+RUN make
+RUN make install
+
+
+# STAR
+# ####
+WORKDIR /root/
+RUN git clone https://github.com/alexdobin/STAR.git
+WORKDIR /root/STAR/source
+RUN make STAR
+RUN mv STAR /usr/local/bin/
+
