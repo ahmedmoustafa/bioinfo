@@ -197,7 +197,7 @@ WORKDIR /root/STAR/source
 RUN make STAR
 RUN mv STAR /usr/local/bin/
 
-RUN apt-get -y install unzip liblzma-dev
+RUN apt-get -y install unzip liblzma-dev libbz2-dev
 
 # Salmon
 # ######
