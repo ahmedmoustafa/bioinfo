@@ -197,6 +197,8 @@ WORKDIR /root/STAR/source
 RUN make STAR
 RUN mv STAR /usr/local/bin/
 
+RUN apt-get -y install unzip
+
 # Salmon
 # ######
 WORKDIR /root/
