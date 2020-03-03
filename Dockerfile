@@ -37,7 +37,10 @@ RUN apt-get -y install libxml2-dev
 RUN apt-get -y install libmagic-dev \
 libhdf5-dev \
 fuse libfuse-dev \
-libtbb-dev
+libtbb-dev \
+unzip \
+liblzma-dev \
+libbz2-dev
 
 
 WORKDIR /root/
@@ -150,81 +153,6 @@ RUN make
 RUN make install
 WORKDIR /root/mafft-7.453-with-extensions/extensions/
 RUN make clean
-RUN make
-RUN make install
-
-# BWA
-# ###
-WORKDIR /root/
-RUN git clone https://github.com/lh3/bwa.git
-WORKDIR /root/bwa
-RUN make
-RUN mv bwa /usr/local/bin/
-
-# TopHat
-# ######
-# (It does not compile)
-WORKDIR /root/
-RUN wget -t 0 https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz
-RUN tar zxvf tophat-2.1.1.Linux_x86_64.tar.gz
-WORKDIR /root/tophat-2.1.1.Linux_x86_64
-RUN mv tophat* /usr/local/bin/
-
-# HISAT2
-# ######
-WORKDIR /root/
-RUN git clone https://github.com/infphilo/hisat2.git
-WORKDIR /root/hisat2
-RUN make
-RUN mv hisat2-* /usr/local/bin/
-RUN mv hisat2 /usr/local/bin/
-
-
-# Bowtie2
-# ######
-WORKDIR /root/
-RUN  git clone https://github.com/BenLangmead/bowtie2.git
-WORKDIR /root/bowtie2/
-RUN make
-RUN make install
-
-
-# STAR
-# ####
-WORKDIR /root/
-RUN git clone https://github.com/alexdobin/STAR.git
-WORKDIR /root/STAR/source
-RUN make STAR
-RUN mv STAR /usr/local/bin/
-
-RUN apt-get -y install unzip liblzma-dev libbz2-dev
-
-# Salmon
-# ######
-WORKDIR /root/
-RUN git clone https://github.com/COMBINE-lab/salmon.git
-WORKDIR /root/salmon
-RUN mkdir build
-WORKDIR /root/salmon/build
-RUN cmake ..
-RUN make
-RUN make install
-RUN make test
-RUN mv /root/salmon/bin/* /usr/local/bin/
-RUN mv /root/salmon/lib/* /usr/local/lib/
-
-
-# kallisto
-# ########
-WORKDIR /root/
-RUN git clone https://github.com/pachterlab/kallisto.git
-WORKDIR /root/kallisto/ext/htslib
-RUN autoheader
-RUN autoconf
-WORKDIR /root/kallisto/
-RUN mkdir build
-WORKDIR /root/kallisto/build
-RUN cmake ..
 RUN make
 RUN make install
 
