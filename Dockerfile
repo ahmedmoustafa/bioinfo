@@ -200,3 +200,49 @@ WORKDIR /root/STAR/source
 RUN make STAR
 RUN mv STAR /usr/local/bin/
 
+
+# Salmon
+# ######
+WORKDIR /root/
+RUN git clone https://github.com/COMBINE-lab/salmon.git
+WORKDIR /root/salmon
+RUN mkdir build
+WORKDIR /root/salmon/build
+RUN cmake ..
+RUN make
+RUN make install
+RUN make test
+RUN mv /root/salmon/bin/* /usr/local/bin/
+RUN mv /root/salmon/lib/* /usr/local/lib/
+
+
+# kallisto
+# ########
+WORKDIR /root/
+RUN git clone https://github.com/pachterlab/kallisto.git
+WORKDIR /root/kallisto/ext/htslib
+RUN autoheader
+RUN autoconf
+WORKDIR /root/kallisto/
+RUN mkdir build
+WORKDIR /root/kallisto/build
+RUN cmake ..
+RUN make
+RUN make install
+
+
+WORKDIR /root/
+
+# Showing versions
+# ################
+
+RUN blastn -version
+RUN diamond --version
+RUN muscle -version
+RUN mafft --version
+RUN tophat --version
+RUN hisat2 --version
+RUN bowtie2 --version
+RUN STAR --version
+RUN salmon --version
+
