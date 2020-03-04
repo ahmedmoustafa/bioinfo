@@ -17,3 +17,8 @@
 | [Salmon](https://combine-lab.github.io/salmon/) | [Alignment and mapping methodology influence transcript abundance estimation](https://doi.org/10.1101/657874) |
 | [kallisto](https://pachterlab.github.io/kallisto/) | [Near-optimal probabilistic RNA-seq quantification](https://www.ncbi.nlm.nih.gov/pubmed/27043002) |
 | [BBMap](https://sourceforge.net/projects/bbmap/) | [BBMerge – Accurate paired shotgun read merging via overlap](https://www.ncbi.nlm.nih.gov/pubmed/29073143) |
+| [FASTX](https://github.com/agordon/fastx_toolkit) | [Collection of command line tools for Short-Reads FASTA/FASTQ files preprocessing](http://hannonlab.cshl.edu/fastx_toolkit/) |
+| [Trimmomatic](https://github.com/timflutre/trimmomatic) | [Trimmomatic: a flexible trimmer for Illumina sequence data](https://www.ncbi.nlm.nih.gov/pubmed/24695404) |
+| [SeqKit](https://bioinf.shenwei.me/seqkit/) | [SeqKit: a cross-platform and ultrafast toolkit for FASTA/Q file manipulation](https://www.ncbi.nlm.nih.gov/pubmed/27706213) |
+| [fastp](https://github.com/OpenGene/fastp) | [fastp: an ultra-fast all-in-one FASTQ preprocessor](https://www.ncbi.nlm.nih.gov/pubmed/30423086) |
+

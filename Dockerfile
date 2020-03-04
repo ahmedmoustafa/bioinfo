@@ -239,6 +239,54 @@ RUN tar zxvf BBMap_38.79.tar.gz
 RUN mv bbmap/* /usr/local/bin/
 
 
+# Sequence Processing
+# ###################
+# ###################
+
+# FASTX
+# #####
+WORKDIR /root/
+RUN git clone https://github.com/agordon/libgtextutils.git
+WORKDIR /root/libgtextutils/
+RUN ./reconf
+RUN ./configure
+RUN make
+RUN make install
+WORKDIR /root/
+RUN git clone https://github.com/agordon/fastx_toolkit.git
+WORKDIR /root/fastx_toolkit
+RUN wget -t 0 https://github.com/agordon/fastx_toolkit/files/1182724/fastx-toolkit-gcc7-patch.txt
+RUN patch -p1 < fastx-toolkit-gcc7-patch.txt
+RUN ./reconf
+RUN ./configure
+RUN make
+RUN make install
+
+# Trimmomatic
+# ###########
+WORKDIR /root/
+RUN git clone https://github.com/timflutre/trimmomatic.git
+WORKDIR /root/trimmomatic
+RUN make
+RUN make install INSTALL="/usr/local/"
+
+# SeqKit
+# ######
+WORKDIR /root/
+RUN wget -t 0 https://github.com/shenwei356/seqkit/releases/download/v0.10.1/seqkit_linux_amd64.tar.gz
+RUN tar zxvf seqkit_linux_amd64.tar.gz
+RUN mv seqkit /usr/local/bin/
+
+# fastp
+# #####
+WORKDIR /root/
+RUN git clone https://github.com/OpenGene/fastp.git
+WORKDIR /root/fastp
+RUN make
+RUN make install
+
+
+
 
 
 
