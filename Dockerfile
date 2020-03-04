@@ -7,49 +7,38 @@ WORKDIR /root/
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
-RUN apt-get update
-RUN apt-get -y upgrade
+RUN apt-get update ; apt-get -y upgrade
 
-RUN apt-get -y install apt-utils
-RUN apt-get -y install dialog
-RUN apt-get -y install software-properties-common
-
-RUN apt-get update
-RUN apt-get -y upgrade
-
-RUN apt-get -y install vim nano emacs
-RUN apt-get -y install curl wget
-RUN apt-get -y install build-essential libtool libboost-all-dev autotools-dev automake autoconf
-RUN apt-get -y install htop parallel
-RUN apt-get -y install gnupg
-RUN apt-get -y install lsof
-RUN apt-get -y install git
-RUN apt-get -y install locate
-RUN apt-get -y install rsync
-RUN apt-get -y install unrar
-RUN apt-get -y install bc
-RUN apt-get -y install screen
-RUN apt-get -y install aptitude
-RUN apt-get -y install default-jre default-jdk
-RUN apt-get -y install ant
-RUN apt-get -y install libssl-dev libcurl4-openssl-dev
-RUN apt-get -y install libxml2-dev
-RUN apt-get -y install libmagic-dev \
-libhdf5-dev \
+RUN apt-get -y install apt-utils \
+dialog \
+software-properties-common \
+vim nano emacs \
+rsync curl wget \
+build-essential libtool libboost-all-dev autotools-dev automake autoconf \
+screen htop parallel \
+gnupg \
+lsof \
+git \
+locate \
+unrar \
+bc \
+aptitude \
+default-jre default-jdk ant \
+libssl-dev libcurl4-openssl-dev \
+libxml2-dev \
+libmagic-dev \
+hdf5-* libhdf5-* \
 fuse libfuse-dev \
 libtbb-dev \
-unzip \
-liblzma-dev \
-libbz2-dev
+unzip liblzma-dev libbz2-dev \
+bison libbison-dev
 
 
 WORKDIR /root/
 RUN wget -t 0 https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4.tar.gz
 RUN tar zxvf cmake-3.16.4.tar.gz
 WORKDIR /root/cmake-3.16.4
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 
 # Sequence search
@@ -69,8 +58,7 @@ RUN git clone https://github.com/bbuchfink/diamond.git
 WORKDIR /root/diamond/
 RUN mkdir bin
 WORKDIR /root/diamond/bin/
-RUN cmake ..
-RUN make install
+RUN cmake .. ; make install
 
 
 # NCBI Tools
@@ -86,44 +74,28 @@ RUN git clone https://github.com/ncbi/sra-tools.git
 
 
 WORKDIR /root/ncbi/ncbi-vdb
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 WORKDIR /root/ncbi/ngs
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 WORKDIR /root/ncbi/ngs/ngs-sdk
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 WORKDIR /root/ncbi/ngs/ngs-python
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 WORKDIR /root/ncbi/ngs/ngs-java
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 WORKDIR /root/ncbi/ngs/ngs-bam
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 WORKDIR /root/ncbi/ngs-tools
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 WORKDIR /root/ncbi/sra-tools
-RUN ./configure
-RUN make
-RUN make install
+RUN ./configure ; make ; make install
 
 
 # Alignment Tools
