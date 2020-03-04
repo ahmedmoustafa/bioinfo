@@ -16,3 +16,4 @@
 | [STAR](https://github.com/alexdobin/STAR) | [STAR: ultrafast universal RNA-seq aligner](https://www.ncbi.nlm.nih.gov/pubmed/23104886) |
 | [Salmon](https://combine-lab.github.io/salmon/) | [Alignment and mapping methodology influence transcript abundance estimation](https://doi.org/10.1101/657874) |
 | [kallisto](https://pachterlab.github.io/kallisto/) | [Near-optimal probabilistic RNA-seq quantification](https://www.ncbi.nlm.nih.gov/pubmed/27043002) |
+| [BBMap](https://sourceforge.net/projects/bbmap/) | [BBMerge – Accurate paired shotgun read merging via overlap](https://www.ncbi.nlm.nih.gov/pubmed/29073143) |

@@ -231,6 +231,16 @@ RUN cmake ..
 RUN make
 RUN make install
 
+# BBMap
+# #####
+WORKDIR /root/
+RUN wget -t 0 https://downloads.sourceforge.net/project/bbmap/BBMap_38.79.tar.gz
+RUN tar zxvf BBMap_38.79.tar.gz
+RUN mv bbmap/* /usr/local/bin/
+
+
+
+
 
 WORKDIR /root/
 
@@ -246,4 +256,5 @@ RUN hisat2 --version
 RUN bowtie2 --version
 RUN STAR --version
 RUN salmon --version
+RUN bbmap.sh --version
 
