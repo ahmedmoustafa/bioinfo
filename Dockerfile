@@ -14,7 +14,8 @@ dialog \
 software-properties-common \
 vim nano emacs \
 rsync curl wget \
-build-essential libtool libboost-all-dev autotools-dev automake autoconf \
+build-essential libtool autotools-dev automake autoconf \
+libboost-dev libboost-all-dev libboost-system-dev libboost-program-options-dev libboost-iostreams-dev libboost-filesystem-dev \
 screen htop parallel \
 gnupg \
 lsof \
@@ -53,12 +54,12 @@ hmmer
 
 # Diamond
 # #######
-WORKDIR /root/
-RUN git clone https://github.com/bbuchfink/diamond.git
-WORKDIR /root/diamond/
-RUN mkdir bin
-WORKDIR /root/diamond/bin/
-RUN cmake .. ; make install
+# WORKDIR /root/
+# RUN git clone https://github.com/bbuchfink/diamond.git
+# WORKDIR /root/diamond/
+# RUN mkdir bin
+# WORKDIR /root/diamond/bin/
+# RUN cmake .. ; make install
 
 
 # NCBI Tools
@@ -245,7 +246,7 @@ RUN make install INSTALL="/usr/local/"
 # SeqKit
 # ######
 WORKDIR /root/
-RUN wget -t 0 https://github.com/shenwei356/seqkit/releases/download/v0.10.1/seqkit_linux_amd64.tar.gz
+RUN wget -t 0 https://github.com/shenwei356/seqkit/releases/download/v0.12.0/seqkit_linux_amd64.tar.gz
 RUN tar zxvf seqkit_linux_amd64.tar.gz
 RUN mv seqkit /usr/local/bin/
 
@@ -254,11 +255,25 @@ RUN mv seqkit /usr/local/bin/
 WORKDIR /root/
 RUN git clone https://github.com/OpenGene/fastp.git
 WORKDIR /root/fastp
-RUN make
-RUN make install
+RUN make ; make install
 
+# HTStream
+# ########
+# WORKDIR /root/
+# RUN git clone https://github.com/ibest/HTStream.git
+# WORKDIR /root/HTStream
+# RUN mkdir build
+# WORKDIR /root/HTStream/build
+# RUN cmake .. ; make ; make install
 
-
+# fqtrim
+# ######
+# https://ccb.jhu.edu/software/fqtrim/
+WORKDIR /root/
+RUN wget -t 0 http://ccb.jhu.edu/software/fqtrim/dl/fqtrim-0.9.7.tar.gz
+RUN tar zxvf fqtrim-0.9.7.tar.gz
+WORKDIR /root/fqtrim-0.9.7/
+RUN make ; mv fqtrim /usr/local/bin/
 
 
 
@@ -268,7 +283,7 @@ WORKDIR /root/
 # ################
 
 RUN blastn -version
-RUN diamond --version
+# RUN diamond --version
 RUN muscle -version
 RUN mafft --version
 RUN tophat --version
