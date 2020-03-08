@@ -16,6 +16,9 @@ vim nano emacs \
 rsync curl wget \
 build-essential libtool autotools-dev automake autoconf \
 libboost-dev libboost-all-dev libboost-system-dev libboost-program-options-dev libboost-iostreams-dev libboost-filesystem-dev \
+gfortran libgfortran3 \
+python python-pip python-dev python3.7 python3.7-dev python3-pip \
+default-jre default-jdk ant \
 screen htop parallel \
 gnupg \
 lsof \
@@ -24,7 +27,6 @@ locate \
 unrar \
 bc \
 aptitude \
-default-jre default-jdk ant \
 libssl-dev libcurl4-openssl-dev \
 libxml2-dev \
 libmagic-dev \
@@ -35,6 +37,8 @@ unzip liblzma-dev libbz2-dev \
 bison libbison-dev
 
 
+# Cmake
+# #####
 WORKDIR /root/
 RUN wget -t 0 https://github.com/Kitware/CMake/releases/download/v3.16.4/cmake-3.16.4.tar.gz
 RUN tar zxvf cmake-3.16.4.tar.gz
@@ -277,11 +281,49 @@ RUN make ; mv fqtrim /usr/local/bin/
 
 
 
+# Phylogenetics
+# #############
+# #############
+
+# TreeTime
+# ########
+RUN pip3 install phylo-treetime
+
+# FastTree
+# ########
+WORKDIR /root/
+RUN wget -t 0 http://www.microbesonline.org/fasttree/FastTree.c ; \
+gcc -O3 -finline-functions -funroll-loops -Wall -o FastTree FastTree.c -lm ; \
+gcc -DOPENMP -fopenmp -O3 -finline-functions -funroll-loops -Wall -o FastTreeMP FastTree.c -lm
+
+# RAxML
+# #####
+WORKDIR /root/
+RUN git clone https://github.com/stamatak/standard-RAxML.git
+WORKDIR /root/standard-RAxML
+
+RUN rm *.o ; make -f Makefile.gcc ; cp raxmlHPC /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.SSE3.gcc ; cp raxmlHPC-SSE3 /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.PTHREADS.gcc ; cp raxmlHPC-PTHREADS /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.SSE3.PTHREADS.gcc ; cp raxmlHPC-PTHREADS-SSE3 /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.MPI.gcc ; cp raxmlHPC-MPI /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.SSE3.MPI.gcc ; cp raxmlHPC-MPI-SSE3 /usr/local/bin/
+
+
+# PhyML
+# #####
+WORKDIR /root/
+RUN git clone https://github.com/stephaneguindon/phyml.git
+WORKDIR /root/phyml/
+RUN sh ./autogen.sh; ./configure ; make ; make install
+
+
+
 WORKDIR /root/
 
 # Showing versions
 # ################
-
+RUN python3.7 --version
 RUN blastn -version
 # RUN diamond --version
 RUN muscle -version
