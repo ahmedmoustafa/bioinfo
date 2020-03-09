@@ -21,4 +21,10 @@
 | [Trimmomatic](https://github.com/timflutre/trimmomatic) | [Trimmomatic: a flexible trimmer for Illumina sequence data](https://www.ncbi.nlm.nih.gov/pubmed/24695404) |
 | [SeqKit](https://bioinf.shenwei.me/seqkit/) | [SeqKit: a cross-platform and ultrafast toolkit for FASTA/Q file manipulation](https://www.ncbi.nlm.nih.gov/pubmed/27706213) |
 | [fastp](https://github.com/OpenGene/fastp) | [fastp: an ultra-fast all-in-one FASTQ preprocessor](https://www.ncbi.nlm.nih.gov/pubmed/30423086) |
-
+| [HTStream](https://github.com/ibest/HTStream.git) | [A toolset for high throughput sequence analysis using a streaming approach facilitated by Linux pipes](https://ibest.github.io/HTStream/) |
+| [fqtrim](https://ccb.jhu.edu/software/fqtrim/) |  |
+| [TreeTime](https://github.com/neherlab/treetime) | [TreeTime: Maximum-likelihood phylodynamic analysis](https://www.ncbi.nlm.nih.gov/pubmed/29340210) |
+| [FastTree](http://www.microbesonline.org/fasttree/) | [FastTree 2--approximately maximum-likelihood trees for large alignments](https://www.ncbi.nlm.nih.gov/pubmed/20224823) |
+| [RAxML](https://github.com/stamatak/standard-RAxML.git) | [RAxML version 8: a tool for phylogenetic analysis and post-analysis of large phylogenies](https://www.ncbi.nlm.nih.gov/pubmed/24451623) |
+| [RAxML-NG](https://github.com/amkozlov/raxml-ng) | [RAxML-NG: a fast, scalable and user-friendly tool for maximum likelihood phylogenetic inference](https://www.ncbi.nlm.nih.gov/pubmed/31070718) | 
+| [PhyML](https://github.com/stephaneguindon/phyml.git) | [Estimating maximum likelihood phylogenies with PhyML](https://www.ncbi.nlm.nih.gov/pubmed/19378142) |

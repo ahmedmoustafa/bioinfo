@@ -34,7 +34,9 @@ hdf5-* libhdf5-* \
 fuse libfuse-dev \
 libtbb-dev \
 unzip liblzma-dev libbz2-dev \
-bison libbison-dev
+bison libbison-dev \
+flex \
+libgmp3-dev
 
 
 # Cmake
@@ -58,13 +60,12 @@ hmmer
 
 # Diamond
 # #######
-# WORKDIR /root/
-# RUN git clone https://github.com/bbuchfink/diamond.git
-# WORKDIR /root/diamond/
-# RUN mkdir bin
-# WORKDIR /root/diamond/bin/
-# RUN cmake .. ; make install
-
+WORKDIR /root/
+RUN git clone https://github.com/bbuchfink/diamond.git
+WORKDIR /root/diamond/
+RUN mkdir bin
+WORKDIR /root/diamond/bin/
+RUN cmake .. ; make install
 
 # NCBI Tools
 # ##########
@@ -261,14 +262,20 @@ RUN git clone https://github.com/OpenGene/fastp.git
 WORKDIR /root/fastp
 RUN make ; make install
 
+RUN apt-get -y install liblzma-dev 
+
 # HTStream
 # ########
-# WORKDIR /root/
+WORKDIR /root/
 # RUN git clone https://github.com/ibest/HTStream.git
 # WORKDIR /root/HTStream
 # RUN mkdir build
 # WORKDIR /root/HTStream/build
 # RUN cmake .. ; make ; make install
+RUN wget -t 0 https://github.com/ibest/HTStream/releases/download/v1.0.0-release/HTStream_1.0.0-release.tar.gz ; \
+tar zxvf HTStream_1.0.0-release.tar.gz ; \
+mv hts_* /usr/local/bin/
+
 
 # fqtrim
 # ######
@@ -294,7 +301,9 @@ RUN pip3 install phylo-treetime
 WORKDIR /root/
 RUN wget -t 0 http://www.microbesonline.org/fasttree/FastTree.c ; \
 gcc -O3 -finline-functions -funroll-loops -Wall -o FastTree FastTree.c -lm ; \
-gcc -DOPENMP -fopenmp -O3 -finline-functions -funroll-loops -Wall -o FastTreeMP FastTree.c -lm
+gcc -DOPENMP -fopenmp -O3 -finline-functions -funroll-loops -Wall -o FastTreeMP FastTree.c -lm ; \
+mv FastTree /usr/local/bin ; \
+mv FastTreeMP /usr/local/bin 
 
 # RAxML
 # #####
@@ -308,6 +317,17 @@ rm *.o ; make -f Makefile.PTHREADS.gcc ; cp raxmlHPC-PTHREADS /usr/local/bin/ ; 
 rm *.o ; make -f Makefile.SSE3.PTHREADS.gcc ; cp raxmlHPC-PTHREADS-SSE3 /usr/local/bin/ ; \
 rm *.o ; make -f Makefile.MPI.gcc ; cp raxmlHPC-MPI /usr/local/bin/ ; \
 rm *.o ; make -f Makefile.SSE3.MPI.gcc ; cp raxmlHPC-MPI-SSE3 /usr/local/bin/
+
+# RAxML NG
+# ########
+WORKDIR /root/
+RUN git clone --recursive https://github.com/amkozlov/raxml-ng
+WORKDIR /root/raxml-ng
+RUN mkdir build
+WORKDIR /root/raxml-ng/build
+RUN cmake .. ; make ; mv ../bin/raxml-ng /usr/local/bin/
+RUN cmake -DSTATIC_BUILD=ON -DENABLE_RAXML_SIMD=OFF -DENABLE_PLLMOD_SIMD=OFF .. ; make ; mv ../bin/raxml-ng-static /usr/local/bin/
+RUN cmake -DUSE_MPI=ON .. ; make ; mv ../bin/raxml-ng-mpi /usr/local/bin/
 
 
 # PhyML
@@ -325,7 +345,7 @@ WORKDIR /root/
 # ################
 RUN python3.7 --version
 RUN blastn -version
-# RUN diamond --version
+RUN diamond --version
 RUN muscle -version
 RUN mafft --version
 RUN tophat --version
@@ -334,4 +354,9 @@ RUN bowtie2 --version
 RUN STAR --version
 RUN salmon --version
 RUN bbmap.sh --version
-
+RUN hts_Stats --version
+RUN treetime --version
+# RUN FastTree
+# RUN phyml --version
+RUN raxmlHPC -v
+RUN raxml-ng --version
