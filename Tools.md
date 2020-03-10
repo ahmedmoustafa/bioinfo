@@ -31,3 +31,4 @@
 | [SAMtools](https://github.com/samtools/samtools) | [The Sequence Alignment/Map format and SAMtools](https://www.ncbi.nlm.nih.gov/pubmed/19505943) |
 | [BCFtools](https://github.com/samtools/bcftools) | [https://www.ncbi.nlm.nih.gov/pubmed/28205675](https://www.ncbi.nlm.nih.gov/pubmed/28205675) |
 | [Bamtools](https://github.com/pezmaster31/bamtools) | [BamTools provides both a programmer's API and an end-user's toolkit for handling BAM files](https://github.com/pezmaster31/bamtools/wiki) |
+| [VCFtools](https://github.com/vcftools/vcftools) | [The Variant Call Format and VCFtools](https://www.ncbi.nlm.nih.gov/pubmed/21653522) |

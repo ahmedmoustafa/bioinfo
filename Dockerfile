@@ -373,7 +373,12 @@ RUN mkdir build
 WORKDIR /root/bamtools/build
 RUN cmake .. ; make ; make install
 
-
+# VCFtools
+##########
+WORKDIR /root/
+RUN git clone https://github.com/vcftools/vcftools.git
+WORKDIR /root/vcftools
+RUN ./autogen.sh ; ./configure ; make ; make install
 
 
 
@@ -401,3 +406,4 @@ RUN raxml-ng --version
 RUN samtools  --version
 RUN bcftools  --version
 RUN bamtools --version
+RUN vcftools --version
