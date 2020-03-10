@@ -364,6 +364,17 @@ WORKDIR /root/bcftools
 RUN autoheader ; autoconf ; ./configure ; make ; make install
 
 
+# Bamtools
+##########
+WORKDIR /root/
+RUN git clone git://github.com/pezmaster31/bamtools.git
+WORKDIR /root/bamtools
+RUN mkdir build
+WORKDIR /root/bamtools/build
+RUN cmake .. ; make ; make install
+
+
+
 
 
 WORKDIR /root/
@@ -389,3 +400,4 @@ RUN raxmlHPC -v
 RUN raxml-ng --version
 RUN samtools  --version
 RUN bcftools  --version
+RUN bamtools --version
