@@ -36,7 +36,8 @@ libtbb-dev \
 unzip liblzma-dev libbz2-dev \
 bison libbison-dev \
 flex \
-libgmp3-dev
+libgmp3-dev \
+libncurses5-dev libncursesw5-dev
 
 
 # Cmake
@@ -287,7 +288,6 @@ WORKDIR /root/fqtrim-0.9.7/
 RUN make ; mv fqtrim /usr/local/bin/
 
 
-
 # Phylogenetics
 # #############
 # #############
@@ -338,6 +338,25 @@ WORKDIR /root/phyml/
 RUN sh ./autogen.sh; ./configure ; make ; make install
 
 
+# BAM Processing
+################
+################
+
+# HTSlib
+########
+WORKDIR /root/
+RUN git clone https://github.com/samtools/htslib.git
+WORKDIR /root/htslib
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+# Samtools
+##########
+WORKDIR /root/
+RUN git clone git://github.com/samtools/samtools.git
+WORKDIR /root/samtools
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+
 
 WORKDIR /root/
 
@@ -360,3 +379,4 @@ RUN treetime --version
 # RUN phyml --version
 RUN raxmlHPC -v
 RUN raxml-ng --version
+RUN samtools  --version
