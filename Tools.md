@@ -32,3 +32,4 @@
 | [BCFtools](https://github.com/samtools/bcftools) | [https://www.ncbi.nlm.nih.gov/pubmed/28205675](https://www.ncbi.nlm.nih.gov/pubmed/28205675) |
 | [Bamtools](https://github.com/pezmaster31/bamtools) | [BamTools provides both a programmer's API and an end-user's toolkit for handling BAM files](https://github.com/pezmaster31/bamtools/wiki) |
 | [VCFtools](https://github.com/vcftools/vcftools) | [The Variant Call Format and VCFtools](https://www.ncbi.nlm.nih.gov/pubmed/21653522) |
+| [BEDTools](https://github.com/arq5x/bedtools2) | [BEDTools: a flexible suite of utilities for comparing genomic features](https://www.ncbi.nlm.nih.gov/pubmed/20110278) |

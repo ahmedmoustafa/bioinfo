@@ -380,6 +380,14 @@ RUN git clone https://github.com/vcftools/vcftools.git
 WORKDIR /root/vcftools
 RUN ./autogen.sh ; ./configure ; make ; make install
 
+# Bedtools
+##########
+WORKDIR /root/
+RUN git clone https://github.com/arq5x/bedtools2.git
+WORKDIR /root/bedtools2
+RUN make ; make install
+
+
 
 
 WORKDIR /root/
@@ -407,3 +415,4 @@ RUN samtools  --version
 RUN bcftools  --version
 RUN bamtools --version
 RUN vcftools --version
+RUN bedtools --version
