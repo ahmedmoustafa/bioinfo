@@ -356,6 +356,14 @@ RUN git clone git://github.com/samtools/samtools.git
 WORKDIR /root/samtools
 RUN autoheader ; autoconf ; ./configure ; make ; make install
 
+# Bcftools
+##########
+WORKDIR /root/
+RUN git clone https://github.com/samtools/bcftools.git
+WORKDIR /root/bcftools
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+
 
 
 WORKDIR /root/
@@ -380,3 +388,4 @@ RUN treetime --version
 RUN raxmlHPC -v
 RUN raxml-ng --version
 RUN samtools  --version
+RUN bcftools  --version

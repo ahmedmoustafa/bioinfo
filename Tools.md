@@ -29,3 +29,4 @@
 | [RAxML-NG](https://github.com/amkozlov/raxml-ng) | [RAxML-NG: a fast, scalable and user-friendly tool for maximum likelihood phylogenetic inference](https://www.ncbi.nlm.nih.gov/pubmed/31070718) | 
 | [PhyML](https://github.com/stephaneguindon/phyml.git) | [Estimating maximum likelihood phylogenies with PhyML](https://www.ncbi.nlm.nih.gov/pubmed/19378142) |
 | [SAMtools](https://github.com/samtools/samtools) | [The Sequence Alignment/Map format and SAMtools](https://www.ncbi.nlm.nih.gov/pubmed/19505943) |
+| [BCFtools](https://github.com/samtools/bcftools) | [https://www.ncbi.nlm.nih.gov/pubmed/28205675](https://www.ncbi.nlm.nih.gov/pubmed/28205675) |
