@@ -37,7 +37,8 @@ unzip liblzma-dev libbz2-dev \
 bison libbison-dev \
 flex \
 libgmp3-dev \
-libncurses5-dev libncursesw5-dev
+libncurses5-dev libncursesw5-dev \
+liblzma-dev
 
 
 # Cmake
@@ -74,10 +75,10 @@ WORKDIR /root/
 RUN mkdir ncbi
 WORKDIR /root/ncbi
 
-RUN git clone https://github.com/ncbi/ngs.git
-RUN git clone https://github.com/ncbi/ncbi-vdb.git
-RUN git clone https://github.com/ncbi/ngs-tools.git
-RUN git clone https://github.com/ncbi/sra-tools.git
+RUN git clone https://github.com/ncbi/ngs.git ; \
+git clone https://github.com/ncbi/ncbi-vdb.git ; \
+git clone https://github.com/ncbi/ngs-tools.git ; \
+git clone https://github.com/ncbi/sra-tools.git
 
 
 WORKDIR /root/ncbi/ncbi-vdb
@@ -119,8 +120,7 @@ WORKDIR /root/
 RUN wget -t 0 https://www.drive5.com/muscle/downloads3.8.31/muscle3.8.31_src.tar.gz
 RUN tar zxvf muscle3.8.31_src.tar.gz
 WORKDIR /root/muscle3.8.31/src
-RUN make
-RUN mv muscle /usr/local/bin/
+RUN make ; mv muscle /usr/local/bin/
 
 # MAFFT
 # #####
@@ -128,21 +128,16 @@ WORKDIR /root/
 RUN wget -t 0 https://mafft.cbrc.jp/alignment/software/mafft-7.453-with-extensions-src.tgz
 RUN tar zxvf mafft-7.453-with-extensions-src.tgz
 WORKDIR /root/mafft-7.453-with-extensions/core
-RUN make clean
-RUN make
-RUN make install
+RUN make clean ; make ; make install
 WORKDIR /root/mafft-7.453-with-extensions/extensions/
-RUN make clean
-RUN make
-RUN make install
+RUN make clean ; make ; make install
 
 # BWA
 # ###
 WORKDIR /root/
 RUN git clone https://github.com/lh3/bwa.git
 WORKDIR /root/bwa
-RUN make
-RUN mv bwa /usr/local/bin/
+RUN make ; mv bwa /usr/local/bin/
 
 # TopHat
 # ######
@@ -158,9 +153,7 @@ RUN mv tophat* /usr/local/bin/
 WORKDIR /root/
 RUN git clone https://github.com/infphilo/hisat2.git
 WORKDIR /root/hisat2
-RUN make
-RUN mv hisat2-* /usr/local/bin/
-RUN mv hisat2 /usr/local/bin/
+RUN make ; mv hisat2-* /usr/local/bin/ ; mv hisat2 /usr/local/bin/
 
 
 # Bowtie2
@@ -168,8 +161,7 @@ RUN mv hisat2 /usr/local/bin/
 WORKDIR /root/
 RUN  git clone https://github.com/BenLangmead/bowtie2.git
 WORKDIR /root/bowtie2/
-RUN make
-RUN make install
+RUN make ; make install
 
 
 # STAR
@@ -177,8 +169,7 @@ RUN make install
 WORKDIR /root/
 RUN git clone https://github.com/alexdobin/STAR.git
 WORKDIR /root/STAR/source
-RUN make STAR
-RUN mv STAR /usr/local/bin/
+RUN make STAR ; mv STAR /usr/local/bin/
 
 
 # Salmon
@@ -188,12 +179,7 @@ RUN git clone https://github.com/COMBINE-lab/salmon.git
 WORKDIR /root/salmon
 RUN mkdir build
 WORKDIR /root/salmon/build
-RUN cmake ..
-RUN make
-RUN make install
-RUN make test
-RUN mv /root/salmon/bin/* /usr/local/bin/
-RUN mv /root/salmon/lib/* /usr/local/lib/
+RUN cmake .. ; make ; make install ; make test ; mv /root/salmon/bin/* /usr/local/bin/ ; mv /root/salmon/lib/* /usr/local/lib/
 
 
 # kallisto
@@ -201,14 +187,11 @@ RUN mv /root/salmon/lib/* /usr/local/lib/
 WORKDIR /root/
 RUN git clone https://github.com/pachterlab/kallisto.git
 WORKDIR /root/kallisto/ext/htslib
-RUN autoheader
-RUN autoconf
+RUN autoheader ; autoconf
 WORKDIR /root/kallisto/
 RUN mkdir build
 WORKDIR /root/kallisto/build
-RUN cmake ..
-RUN make
-RUN make install
+RUN cmake .. ; make ; make install
 
 # BBMap
 # #####
@@ -227,34 +210,26 @@ RUN mv bbmap/* /usr/local/bin/
 WORKDIR /root/
 RUN git clone https://github.com/agordon/libgtextutils.git
 WORKDIR /root/libgtextutils/
-RUN ./reconf
-RUN ./configure
-RUN make
-RUN make install
+RUN ./reconf ; ./configure ; make ; make install
 WORKDIR /root/
 RUN git clone https://github.com/agordon/fastx_toolkit.git
 WORKDIR /root/fastx_toolkit
 RUN wget -t 0 https://github.com/agordon/fastx_toolkit/files/1182724/fastx-toolkit-gcc7-patch.txt
 RUN patch -p1 < fastx-toolkit-gcc7-patch.txt
-RUN ./reconf
-RUN ./configure
-RUN make
-RUN make install
+RUN ./reconf ; ./configure ; make ; make install
 
 # Trimmomatic
 # ###########
 WORKDIR /root/
 RUN git clone https://github.com/timflutre/trimmomatic.git
 WORKDIR /root/trimmomatic
-RUN make
-RUN make install INSTALL="/usr/local/"
+RUN make ; make install INSTALL="/usr/local/"
 
 # SeqKit
 # ######
 WORKDIR /root/
 RUN wget -t 0 https://github.com/shenwei356/seqkit/releases/download/v0.12.0/seqkit_linux_amd64.tar.gz
-RUN tar zxvf seqkit_linux_amd64.tar.gz
-RUN mv seqkit /usr/local/bin/
+RUN tar zxvf seqkit_linux_amd64.tar.gz ; mv seqkit /usr/local/bin/
 
 # fastp
 # #####
@@ -262,8 +237,6 @@ WORKDIR /root/
 RUN git clone https://github.com/OpenGene/fastp.git
 WORKDIR /root/fastp
 RUN make ; make install
-
-RUN apt-get -y install liblzma-dev 
 
 # HTStream
 # ########
@@ -325,9 +298,9 @@ RUN git clone --recursive https://github.com/amkozlov/raxml-ng
 WORKDIR /root/raxml-ng
 RUN mkdir build
 WORKDIR /root/raxml-ng/build
-RUN cmake .. ; make ; mv ../bin/raxml-ng /usr/local/bin/
-RUN cmake -DSTATIC_BUILD=ON -DENABLE_RAXML_SIMD=OFF -DENABLE_PLLMOD_SIMD=OFF .. ; make ; mv ../bin/raxml-ng-static /usr/local/bin/
-RUN cmake -DUSE_MPI=ON .. ; make ; mv ../bin/raxml-ng-mpi /usr/local/bin/
+RUN cmake .. ; make ; mv ../bin/raxml-ng /usr/local/bin/ ; \
+cmake -DSTATIC_BUILD=ON -DENABLE_RAXML_SIMD=OFF -DENABLE_PLLMOD_SIMD=OFF .. ; make ; mv ../bin/raxml-ng-static /usr/local/bin/ ; \
+cmake -DUSE_MPI=ON .. ; make ; mv ../bin/raxml-ng-mpi /usr/local/bin/
 
 
 # PhyML
@@ -387,7 +360,12 @@ RUN git clone https://github.com/arq5x/bedtools2.git
 WORKDIR /root/bedtools2
 RUN make ; make install
 
-
+# deepTools
+###########
+WORKDIR /root/
+RUN git clone https://github.com/deeptools/deepTools
+WORKDIR /root/deepTools
+RUN python setup.py install
 
 
 WORKDIR /root/
