@@ -34,3 +34,4 @@
 | [VCFtools](https://github.com/vcftools/vcftools) | [The Variant Call Format and VCFtools](https://www.ncbi.nlm.nih.gov/pubmed/21653522) |
 | [BEDTools](https://github.com/arq5x/bedtools2) | [BEDTools: a flexible suite of utilities for comparing genomic features](https://www.ncbi.nlm.nih.gov/pubmed/20110278) |
 | [deepTools](https://github.com/deeptools/deepTools) | [deepTools2: a next generation web server for deep-sequencing data analysis](https://www.ncbi.nlm.nih.gov/pubmed/27079975) |
+| [BEDOPS](https://github.com/bedops/bedops) |  [BEDOPS: high-performance genomic feature operations](https://www.ncbi.nlm.nih.gov/pubmed/22576172) |

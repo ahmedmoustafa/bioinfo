@@ -367,6 +367,13 @@ RUN git clone https://github.com/deeptools/deepTools
 WORKDIR /root/deepTools
 RUN python setup.py install
 
+# BEDOPS
+########
+WORKDIR /root/
+RUN git clone https://github.com/bedops/bedops.git
+WORKDIR /root/bedops
+RUN make ; make install ; mv ./bin/* /usr/local/bin/
+
 
 WORKDIR /root/
 
@@ -394,3 +401,5 @@ RUN bcftools  --version
 RUN bamtools --version
 RUN vcftools --version
 RUN bedtools --version
+RUN deeptools --version
+RUN bedops --version
