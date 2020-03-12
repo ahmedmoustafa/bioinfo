@@ -427,29 +427,29 @@ WORKDIR /root/
 
 # Showing versions
 # ################
-RUN python3.7 --version
-RUN blastn -version
-RUN diamond --version
-RUN muscle -version
-RUN mafft --version
-RUN tophat --version
-RUN hisat2 --version
-RUN bowtie2 --version
-RUN STAR --version
-RUN salmon --version
-RUN bbmap.sh --version
-RUN hts_Stats --version
-RUN treetime --version
+RUN python3.7 --version ; \
+blastn -version ; \
+diamond --version ; \
+muscle -version ; \
+mafft --version ; \
+tophat --version ; \
+hisat2 --version ; \
+bowtie2 --version ; \
+STAR --version ; \
+salmon --version ; \
+bbmap.sh --version ; \
+hts_Stats --version ; \
+treetime --version ; \
 # RUN FastTree
 # RUN phyml --version
-RUN raxmlHPC -v
-RUN raxml-ng --version
-RUN samtools  --version
-RUN bcftools  --version
-RUN bamtools --version
-RUN vcftools --version
-RUN bedtools --version
-RUN deeptools --version
-RUN bedops --version
-RUN spades.py --version
-RUN megahit --version
+raxmlHPC -v ; \
+raxml-ng --version ; \
+samtools  --version ; \
+bcftools  --version ; \
+bamtools --version ; \
+vcftools --version ; \
+bedtools --version ; \
+deeptools --version ; \
+bedops --version ; \
+spades.py --version ; \
+megahit --version ; \
