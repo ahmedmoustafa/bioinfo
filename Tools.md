@@ -35,3 +35,8 @@
 | [BEDTools](https://github.com/arq5x/bedtools2) | [BEDTools: a flexible suite of utilities for comparing genomic features](https://www.ncbi.nlm.nih.gov/pubmed/20110278) |
 | [deepTools](https://github.com/deeptools/deepTools) | [deepTools2: a next generation web server for deep-sequencing data analysis](https://www.ncbi.nlm.nih.gov/pubmed/27079975) |
 | [BEDOPS](https://github.com/bedops/bedops) |  [BEDOPS: high-performance genomic feature operations](https://www.ncbi.nlm.nih.gov/pubmed/22576172) |
+| [SPAdes](https://github.com/ablab/spades) | [SPAdes: a new genome assembly algorithm and its applications to single-cell sequencing](https://www.ncbi.nlm.nih.gov/pubmed/22506599) |
+| [ABySS](https://github.com/bcgsc/abyss) | [ABySS: a parallel assembler for short read sequence data](https://www.ncbi.nlm.nih.gov/pubmed/19251739) |
+| [Velvet](https://github.com/dzerbino/velvet) | [Velvet: algorithms for de novo short read assembly using de Bruijn graphs](https://www.ncbi.nlm.nih.gov/pubmed/18349386) |
+| [MEGAHIT](https://github.com/voutcn/megahit) | [MEGAHIT: An ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph](https://www.ncbi.nlm.nih.gov/pubmed/25609793) |
+| [MetaVelvet](http://metavelvet.dna.bio.keio.ac.jp/) | [MetaVelvet: an extension of Velvet assembler to de novo metagenome assembly from short sequence reads](https://www.ncbi.nlm.nih.gov/pubmed/22821567) |
