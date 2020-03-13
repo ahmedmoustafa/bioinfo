@@ -2,6 +2,7 @@
 
 | Tool | Description |
 | ---- | ----------- |
+| [R](https://cloud.r-project.org/) | [The R Project for Statistical Computing](https://www.r-project.org/) |
 | [NCBI BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) | [Basic Local Alignment Search Tool](https://www.ncbi.nlm.nih.gov/pubmed/2231712) |
 | [DIAMOND](http://diamondsearch.org) | [Fast and sensitive protein alignment using DIAMOND](https://www.ncbi.nlm.nih.gov/pubmed/25402007) |
 | [HMMER](http://hmmer.org/) | [Accelerated Profile HMM Searches](https://www.ncbi.nlm.nih.gov/pubmed/22039361) |

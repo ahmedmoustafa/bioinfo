@@ -50,6 +50,18 @@ WORKDIR /root/cmake-3.16.4
 RUN ./configure ; make ; make install
 
 
+# R
+# #
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 ; \
+add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' ; \
+apt-get update ; \
+apt-get -y install r-base r-base-dev ; \
+R -e "install.packages (c('tidyverse', 'tidylog', 'readr', 'dplyr', 'knitr', 'printr', 'rmarkdown', 'shiny', 'ggplot2', 'gplots', 'reshape2', 'data.table', 'readxl', 'devtools', 'cowplot', 'tictoc', 'ggpubr', 'patchwork'))" ; \
+R -e "install.packages (c('BiocManager', 'vegan'))" ; \
+R -e "BiocManager::install(c('DESeq2', 'edgeR', 'dada2', 'phyloseq', 'metagenomeSeq'), ask = FALSE, update = TRUE)" ; \
+R -e "update.packages(ask = FALSE)" ; \
+
+
 # Sequence search
 # ###############
 # ###############
@@ -192,6 +204,7 @@ WORKDIR /root/kallisto/
 RUN mkdir build
 WORKDIR /root/kallisto/build
 RUN cmake .. ; make ; make install
+RUN R -e "BiocManager::install('pachterlab/sleuth', ask = FALSE, update = TRUE)"
 
 # BBMap
 # #####
