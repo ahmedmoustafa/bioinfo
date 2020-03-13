@@ -73,12 +73,12 @@ hmmer
 
 # Diamond
 # #######
-WORKDIR /root/
-RUN git clone https://github.com/bbuchfink/diamond.git
-WORKDIR /root/diamond/
-RUN mkdir bin
-WORKDIR /root/diamond/bin/
-RUN cmake .. ; make install
+# WORKDIR /root/
+# RUN git clone https://github.com/bbuchfink/diamond.git
+# WORKDIR /root/diamond/
+# RUN mkdir bin
+# WORKDIR /root/diamond/bin/
+# RUN cmake .. ; make install
 
 # NCBI Tools
 # ##########
@@ -442,7 +442,7 @@ WORKDIR /root/
 # ################
 RUN python3.7 --version ; \
 blastn -version ; \
-diamond --version ; \
+# diamond --version ; \
 muscle -version ; \
 mafft --version ; \
 tophat --version ; \
