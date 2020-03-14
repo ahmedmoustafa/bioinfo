@@ -61,5 +61,27 @@ RUN R -e "BiocManager::install(c('DESeq2', 'edgeR', 'dada2', 'phyloseq', 'metage
 RUN R -e "update.packages(ask = FALSE)"
 
 
+
+# Sequence search
+# ###############
+# ###############
+
+# NCBI BLAST & HMMER
+# ##################
+RUN apt-get -y install \
+ncbi-blast+ \
+hmmer
+
+# Diamond
+# #######
+WORKDIR /root/
+RUN git clone https://github.com/bbuchfink/diamond.git
+WORKDIR /root/diamond/
+RUN mkdir bin
+WORKDIR /root/diamond/bin/
+RUN cmake .. ; make install
+
+
+
 WORKDIR /root/
 
