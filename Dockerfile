@@ -217,6 +217,67 @@ RUN tar zxvf BBMap_38.79.tar.gz
 RUN mv bbmap/* /usr/local/bin/
 
 
+# Sequence Processing
+# ###################
+# ###################
+
+# FASTX
+# #####
+WORKDIR /root/
+RUN git clone https://github.com/agordon/libgtextutils.git
+WORKDIR /root/libgtextutils/
+RUN ./reconf ; ./configure ; make ; make install
+WORKDIR /root/
+RUN git clone https://github.com/agordon/fastx_toolkit.git
+WORKDIR /root/fastx_toolkit
+RUN wget -t 0 https://github.com/agordon/fastx_toolkit/files/1182724/fastx-toolkit-gcc7-patch.txt
+RUN patch -p1 < fastx-toolkit-gcc7-patch.txt
+RUN ./reconf ; ./configure ; make ; make install
+
+# Trimmomatic
+# ###########
+WORKDIR /root/
+RUN git clone https://github.com/timflutre/trimmomatic.git
+WORKDIR /root/trimmomatic
+RUN make ; make install INSTALL="/usr/local/"
+
+# SeqKit
+# ######
+WORKDIR /root/
+RUN wget -t 0 https://github.com/shenwei356/seqkit/releases/download/v0.12.0/seqkit_linux_amd64.tar.gz
+RUN tar zxvf seqkit_linux_amd64.tar.gz ; mv seqkit /usr/local/bin/
+
+# fastp
+# #####
+WORKDIR /root/
+RUN git clone https://github.com/OpenGene/fastp.git
+WORKDIR /root/fastp
+RUN make ; make install
+
+# HTStream
+# ########
+WORKDIR /root/
+# RUN git clone https://github.com/ibest/HTStream.git
+# WORKDIR /root/HTStream
+# RUN mkdir build
+# WORKDIR /root/HTStream/build
+# RUN cmake .. ; make ; make install
+RUN wget -t 0 https://github.com/ibest/HTStream/releases/download/v1.0.0-release/HTStream_1.0.0-release.tar.gz ; \
+tar zxvf HTStream_1.0.0-release.tar.gz ; \
+mv hts_* /usr/local/bin/
+
+
+# fqtrim
+# ######
+# https://ccb.jhu.edu/software/fqtrim/
+WORKDIR /root/
+RUN wget -t 0 http://ccb.jhu.edu/software/fqtrim/dl/fqtrim-0.9.7.tar.gz
+RUN tar zxvf fqtrim-0.9.7.tar.gz
+WORKDIR /root/fqtrim-0.9.7/
+RUN make ; mv fqtrim /usr/local/bin/
+
+
+
 
 
 
