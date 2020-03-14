@@ -277,6 +277,73 @@ WORKDIR /root/fqtrim-0.9.7/
 RUN make ; mv fqtrim /usr/local/bin/
 
 
+# BAM Processing
+################
+################
+
+# HTSlib
+########
+WORKDIR /root/
+RUN git clone https://github.com/samtools/htslib.git
+WORKDIR /root/htslib
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+# Samtools
+##########
+WORKDIR /root/
+RUN git clone git://github.com/samtools/samtools.git
+WORKDIR /root/samtools
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+# Bcftools
+##########
+WORKDIR /root/
+RUN git clone https://github.com/samtools/bcftools.git
+WORKDIR /root/bcftools
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+
+# Bamtools
+##########
+WORKDIR /root/
+RUN git clone git://github.com/pezmaster31/bamtools.git
+WORKDIR /root/bamtools
+RUN mkdir build
+WORKDIR /root/bamtools/build
+RUN cmake .. ; make ; make install
+
+# VCFtools
+##########
+WORKDIR /root/
+RUN git clone https://github.com/vcftools/vcftools.git
+WORKDIR /root/vcftools
+RUN ./autogen.sh ; ./configure ; make ; make install
+
+# Bedtools
+##########
+WORKDIR /root/
+RUN git clone https://github.com/arq5x/bedtools2.git
+WORKDIR /root/bedtools2
+RUN make ; make install
+
+# deepTools
+###########
+WORKDIR /root/
+RUN git clone https://github.com/deeptools/deepTools
+WORKDIR /root/deepTools
+RUN python setup.py install
+
+# BEDOPS
+########
+WORKDIR /root/
+RUN git clone https://github.com/bedops/bedops.git
+WORKDIR /root/bedops
+RUN make ; make install ; mv ./bin/* /usr/local/bin/
+
+WORKDIR /root/
+RUN git clone --recursive https://github.com/biod/sambamba.git
+WORKDIR /root/sambamba
+RUN make ; mvs sambamba /usr/local/bin/
 
 
 
