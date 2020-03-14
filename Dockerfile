@@ -343,7 +343,7 @@ RUN make ; make install ; mv ./bin/* /usr/local/bin/
 WORKDIR /root/
 RUN git clone --recursive https://github.com/biod/sambamba.git
 WORKDIR /root/sambamba
-RUN make ; mvs sambamba /usr/local/bin/
+RUN make ; mv sambamba /usr/local/bin/
 
 
 
