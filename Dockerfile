@@ -82,6 +82,45 @@ hmmer
 # RUN cmake .. ; make install
 
 
+# NCBI Tools
+# ##########
+WORKDIR /root/
+RUN mkdir ncbi
+WORKDIR /root/ncbi
+
+RUN git clone https://github.com/ncbi/ngs.git ; \
+git clone https://github.com/ncbi/ncbi-vdb.git ; \
+git clone https://github.com/ncbi/ngs-tools.git ; \
+git clone https://github.com/ncbi/sra-tools.git
+
+
+WORKDIR /root/ncbi/ncbi-vdb
+RUN ./configure ; make ; make install
+
+WORKDIR /root/ncbi/ngs
+RUN ./configure ; make ; make install
+
+WORKDIR /root/ncbi/ngs/ngs-sdk
+RUN ./configure ; make ; make install
+
+WORKDIR /root/ncbi/ngs/ngs-python
+RUN ./configure ; make ; make install
+
+WORKDIR /root/ncbi/ngs/ngs-java
+RUN ./configure ; make ; make install
+
+WORKDIR /root/ncbi/ngs/ngs-bam
+RUN ./configure ; make ; make install
+
+WORKDIR /root/ncbi/ngs-tools
+RUN ./configure ; make ; make install
+
+WORKDIR /root/ncbi/sra-tools
+RUN ./configure ; make ; make install
+
+
+
+
 
 WORKDIR /root/
 
