@@ -198,3 +198,108 @@ RUN pip install --no-cache-dir -U seqmagick
 
 ########################################################################################################################
 ########################################################################################################################
+
+# Sequence Search
+#################
+#################
+
+# NCBI BLAST & HMMER
+####################
+RUN apt-get -y install ncbi-blast+ hmmer
+
+########################################################################################################################
+########################################################################################################################
+
+# Alignment Tools
+#################
+#################
+
+# JAligner
+##########
+RUN apt-get -y install jaligner
+
+# MUSCLE
+########
+WORKDIR /tmp/setup/
+RUN wget -t 0 https://www.drive5.com/muscle/downloads3.8.31/muscle3.8.31_src.tar.gz
+RUN tar zxvf muscle3.8.31_src.tar.gz
+WORKDIR /tmp/setup/muscle3.8.31/src
+RUN make ; mv muscle /usr/local/bin/
+
+# MAFFT
+#######
+WORKDIR /tmp/setup/
+RUN wget -t 0 https://mafft.cbrc.jp/alignment/software/mafft-7.453-with-extensions-src.tgz
+RUN tar zxvf mafft-7.453-with-extensions-src.tgz
+WORKDIR /tmp/setup/mafft-7.453-with-extensions/core
+RUN make clean ; make ; make install
+WORKDIR /tmp/setup/mafft-7.453-with-extensions/extensions/
+RUN make clean ; make ; make install
+
+# BWA
+#####
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/lh3/bwa.git
+WORKDIR /tmp/setup/bwa
+RUN make ; mv bwa /usr/local/bin/
+
+# TopHat
+########
+# (It does not compile)
+WORKDIR /tmp/setup/
+RUN wget -t 0 https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz
+RUN tar zxvf tophat-2.1.1.Linux_x86_64.tar.gz
+WORKDIR /tmp/setup/tophat-2.1.1.Linux_x86_64
+RUN mv tophat* /usr/local/bin/
+
+# HISAT2
+########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/infphilo/hisat2.git
+WORKDIR /tmp/setup/hisat2
+RUN make ; mv hisat2-* /usr/local/bin/ ; mv hisat2 /usr/local/bin/
+
+# Bowtie2
+########
+WORKDIR /tmp/setup/
+RUN  git clone https://github.com/BenLangmead/bowtie2.git
+WORKDIR /tmp/setup/bowtie2/
+RUN make ; make install
+
+# STAR
+######
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/alexdobin/STAR.git
+WORKDIR /tmp/setup/STAR/source
+RUN make STAR ; mv STAR /usr/local/bin/
+
+# Salmon
+########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/COMBINE-lab/salmon.git
+WORKDIR /tmp/setup/salmon
+RUN mkdir build
+WORKDIR /tmp/setup/salmon/build
+RUN cmake .. ; make ; make install ; make test ; mv /tmp/setup/salmon/bin/* /usr/local/bin/ ; mv /tmp/setup/salmon/lib/* /usr/local/lib/
+
+# kallisto
+##########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/pachterlab/kallisto.git
+WORKDIR /tmp/setup/kallisto/ext/htslib
+RUN autoheader ; autoconf
+WORKDIR /tmp/setup/kallisto/
+RUN mkdir build
+WORKDIR /tmp/setup/kallisto/build
+RUN cmake .. ; make ; make install
+RUN R -e "BiocManager::install('pachterlab/sleuth', ask = FALSE, update = TRUE)"
+
+# BBMap
+#######
+WORKDIR /tmp/setup/
+RUN wget -t 0 https://downloads.sourceforge.net/project/bbmap/BBMap_38.79.tar.gz
+RUN tar zxvf BBMap_38.79.tar.gz
+RUN mv bbmap/* /usr/local/bin/
+
+########################################################################################################################
+########################################################################################################################
