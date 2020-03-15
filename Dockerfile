@@ -340,6 +340,8 @@ RUN git clone https://github.com/bedops/bedops.git
 WORKDIR /root/bedops
 RUN make ; make install ; mv ./bin/* /usr/local/bin/
 
+# SAMBAMBA
+##########
 WORKDIR /root/
 RUN git clone --recursive https://github.com/biod/sambamba.git
 WORKDIR /root/sambamba
