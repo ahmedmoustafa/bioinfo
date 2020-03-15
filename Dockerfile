@@ -353,12 +353,20 @@ RUN make ; mv sambamba /usr/local/bin/
 ############
 ############
 
-# SPAdes
-########
+
+# ABySS
+#######
 WORKDIR /root/
-RUN git clone https://github.com/ablab/spades.git
-WORKDIR /root/spades/assembler
-RUN PREFIX=/usr/local ./spades_compile.sh ; spades.py --test
+RUN git clone https://github.com/sparsehash/sparsehash.git
+WORKDIR /root/sparsehash
+RUN ./autogen.sh ; ./configure ; make ; make install
+WORKDIR /root/
+RUN git clone https://github.com/bcgsc/abyss.git
+WORKDIR /root/abyss
+RUN ./autogen.sh ; ./configure ; make ; make install
+
+
+
 
 
 
