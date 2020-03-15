@@ -93,3 +93,42 @@ R -e "library(keras) ; install_keras()"
 
 ########################################################################################################################
 ########################################################################################################################
+
+# NCBI Tools
+############
+WORKDIR /tmp/setup/
+RUN mkdir ncbi
+WORKDIR /tmp/setup/ncbi
+
+RUN git clone https://github.com/ncbi/ngs.git ; \
+git clone https://github.com/ncbi/ncbi-vdb.git ; \
+git clone https://github.com/ncbi/ngs-tools.git ; \
+git clone https://github.com/ncbi/sra-tools.git
+
+
+WORKDIR /tmp/setup/ncbi/ncbi-vdb
+RUN ./configure ; make ; make install
+
+WORKDIR /tmp/setup/ncbi/ngs
+RUN ./configure ; make ; make install
+
+WORKDIR /tmp/setup/ncbi/ngs/ngs-sdk
+RUN ./configure ; make ; make install
+
+WORKDIR /tmp/setup/ncbi/ngs/ngs-python
+RUN ./configure ; make ; make install
+
+WORKDIR /tmp/setup/ncbi/ngs/ngs-java
+RUN ./configure ; make ; make install
+
+WORKDIR /tmp/setup/ncbi/ngs/ngs-bam
+RUN ./configure ; make ; make install
+
+WORKDIR /tmp/setup/ncbi/ngs-tools
+RUN ./configure ; make ; make install
+
+WORKDIR /tmp/setup/ncbi/sra-tools
+RUN ./configure ; make ; make install
+
+########################################################################################################################
+########################################################################################################################
