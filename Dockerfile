@@ -349,6 +349,55 @@ RUN make ; mv sambamba /usr/local/bin/
 
 
 
+# Assemblers
+############
+############
+
+# SPAdes
+########
+WORKDIR /root/
+RUN git clone https://github.com/ablab/spades.git
+WORKDIR /root/spades/assembler
+RUN PREFIX=/usr/local ./spades_compile.sh ; spades.py --test
+
+# ABySS
+#######
+WORKDIR /root/
+RUN git clone https://github.com/sparsehash/sparsehash.git
+WORKDIR /root/sparsehash
+RUN ./autogen.sh ; ./configure ; make ; make install
+WORKDIR /root/
+RUN git clone https://github.com/bcgsc/abyss.git
+WORKDIR /root/abyss
+RUN ./autogen.sh ; ./configure ; make ; make install
+
+# Velvet
+########
+WORKDIR /root/
+RUN git clone https://github.com/dzerbino/velvet.git
+WORKDIR /root/velvet/
+RUN make ; mv velvet* /usr/local/bin/
+
+
+# MEGAHIT
+#########
+WORKDIR /root/
+RUN git clone https://github.com/voutcn/megahit.git
+WORKDIR /root/megahit
+RUN git submodule update --init
+RUN mkdir build
+WORKDIR /root/megahit/build
+RUN cmake .. -DCMAKE_BUILD_TYPE=Release ; make -j4 ; make simple_test  ; make install
+
+# MetaVelvet
+############
+WORKDIR /root/
+RUN git clone git://github.com/hacchy/MetaVelvet.git
+WORKDIR /root/MetaVelvet
+RUN make ; mv meta-velvetg /usr/local/bin/
+
+
+
 
 WORKDIR /root/
 
