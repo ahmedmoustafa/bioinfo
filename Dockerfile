@@ -132,3 +132,69 @@ RUN ./configure ; make ; make install
 
 ########################################################################################################################
 ########################################################################################################################
+
+# Sequence Processing
+#####################
+#####################
+
+# FASTX
+#######
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/agordon/libgtextutils.git
+WORKDIR /tmp/setup/libgtextutils/
+RUN ./reconf ; ./configure ; make ; make install
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/agordon/fastx_toolkit.git
+WORKDIR /tmp/setup/fastx_toolkit
+RUN wget -t 0 https://github.com/agordon/fastx_toolkit/files/1182724/fastx-toolkit-gcc7-patch.txt
+RUN patch -p1 < fastx-toolkit-gcc7-patch.txt
+RUN ./reconf ; ./configure ; make ; make install
+
+# Trimmomatic
+#############
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/timflutre/trimmomatic.git
+WORKDIR /tmp/setup/trimmomatic
+RUN make ; make install INSTALL="/usr/local/"
+
+# SeqKit
+########
+WORKDIR /tmp/setup/
+RUN wget -t 0 https://github.com/shenwei356/seqkit/releases/download/v0.12.0/seqkit_linux_amd64.tar.gz
+RUN tar zxvf seqkit_linux_amd64.tar.gz ; mv seqkit /usr/local/bin/
+
+# fastp
+#######
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/OpenGene/fastp.git
+WORKDIR /tmp/setup/fastp
+RUN make ; make install
+
+# HTStream
+##########
+WORKDIR /tmp/setup/
+# RUN git clone https://github.com/ibest/HTStream.git
+# WORKDIR /tmp/setup/HTStream
+# RUN mkdir build
+# WORKDIR /tmp/setup/HTStream/build
+# RUN cmake .. ; make ; make install
+RUN wget -t 0 https://github.com/ibest/HTStream/releases/download/v1.0.0-release/HTStream_1.0.0-release.tar.gz ; \
+tar zxvf HTStream_1.0.0-release.tar.gz ; \
+mv hts_* /usr/local/bin/
+
+
+# fqtrim
+########
+# https://ccb.jhu.edu/software/fqtrim/
+WORKDIR /tmp/setup/
+RUN wget -t 0 http://ccb.jhu.edu/software/fqtrim/dl/fqtrim-0.9.7.tar.gz
+RUN tar zxvf fqtrim-0.9.7.tar.gz
+WORKDIR /tmp/setup/fqtrim-0.9.7/
+RUN make ; mv fqtrim /usr/local/bin/
+
+# seqmagick
+###########
+RUN pip install --no-cache-dir -U seqmagick
+
+########################################################################################################################
+########################################################################################################################
