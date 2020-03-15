@@ -68,7 +68,7 @@ RUN ./configure ; make ; make install
 ############
 
 RUN apt-get -y install bioperl
-RUN pip install --no-cache-dir -U biopython numpy pandas matplotlib scipy seaborn statsmodels plotly bokeh scikit-learn tensorflow keras torch theano
+RUN pip install --no-cache-dir -U biopython numpy pandas matplotlib scipy seaborn plotly bokeh scikit-learn tensorflow keras torch theano
 RUN pip3 install --no-cache-dir -U biopython numpy pandas matplotlib scipy seaborn statsmodels plotly bokeh scikit-learn tensorflow keras torch theano
 
 # R
