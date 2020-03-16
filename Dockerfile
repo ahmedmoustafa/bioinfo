@@ -424,3 +424,58 @@ RUN make ; mv meta-velvetg /usr/local/bin/
 ########################################################################################################################
 ########################################################################################################################
 
+# Phylogenetics
+###############
+###############
+
+# TreeTime
+##########
+RUN pip3 install phylo-treetime
+
+
+# FastTree
+##########
+WORKDIR /tmp/setup/
+RUN wget -t 0 http://www.microbesonline.org/fasttree/FastTree.c ; \
+gcc -O3 -finline-functions -funroll-loops -Wall -o FastTree FastTree.c -lm ; \
+gcc -DOPENMP -fopenmp -O3 -finline-functions -funroll-loops -Wall -o FastTreeMP FastTree.c -lm ; \
+mv FastTree /usr/local/bin ; \
+mv FastTreeMP /usr/local/bin 
+
+
+# RAxML
+#######
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/stamatak/standard-RAxML.git
+WORKDIR /tmp/setup/standard-RAxML
+
+RUN rm *.o ; make -f Makefile.gcc ; cp raxmlHPC /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.SSE3.gcc ; cp raxmlHPC-SSE3 /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.PTHREADS.gcc ; cp raxmlHPC-PTHREADS /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.SSE3.PTHREADS.gcc ; cp raxmlHPC-PTHREADS-SSE3 /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.MPI.gcc ; cp raxmlHPC-MPI /usr/local/bin/ ; \
+rm *.o ; make -f Makefile.SSE3.MPI.gcc ; cp raxmlHPC-MPI-SSE3 /usr/local/bin/
+
+
+# RAxML NG
+##########
+WORKDIR /tmp/setup/
+RUN git clone --recursive https://github.com/amkozlov/raxml-ng
+WORKDIR /tmp/setup/raxml-ng
+RUN mkdir build
+WORKDIR /tmp/setup/raxml-ng/build
+RUN cmake .. ; make ; mv ../bin/raxml-ng /usr/local/bin/ ; \
+cmake -DSTATIC_BUILD=ON -DENABLE_RAXML_SIMD=OFF -DENABLE_PLLMOD_SIMD=OFF .. ; make ; mv ../bin/raxml-ng-static /usr/local/bin/ ; \
+cmake -DUSE_MPI=ON .. ; make ; mv ../bin/raxml-ng-mpi /usr/local/bin/
+
+
+# PhyML
+#######
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/stephaneguindon/phyml.git
+WORKDIR /tmp/setup/phyml/
+RUN sh ./autogen.sh; ./configure ; make ; make install
+
+
+########################################################################################################################
+########################################################################################################################
