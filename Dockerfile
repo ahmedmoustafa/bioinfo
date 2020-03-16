@@ -480,16 +480,61 @@ RUN sh ./autogen.sh; ./configure ; make ; make install
 ########################################################################################################################
 ########################################################################################################################
 
-# Unstable
-##########
+
+# Others
+########
+########
 
 
-# Diamond
-# #######
+WORKDIR /tmp/setup/
+
+RUN wget -t 0 http://github.com/bbuchfink/diamond/releases/download/v0.9.30/diamond-linux64.tar.gz ; tar zxvf diamond-linux64.tar.gz ; mv diamond /usr/local/bin/
+
+RUN wget -t 0 http://cab.spbu.ru/files/release3.14.0/SPAdes-3.14.0-Linux.tar.gz ; tar zxvf SPAdes-3.14.0-Linux.tar.gz ; mv SPAdes-3.14.0-Linux/bin/* /usr/local/bin/ ; mv SPAdes-3.14.0-Linux/share/* /usr/local/share/
+
+
+########################################################################################################################
+########################################################################################################################
+
+# Showing versions
+# ################
+
+RUN python3.7 --version ; \
+blastn -version ; \
+diamond --version ; \
+muscle -version ; \
+mafft --version ; \
+tophat --version ; \
+hisat2 --version ; \
+bowtie2 --version ; \
+STAR --version ; \
+salmon --version ; \
+bbmap.sh --version ; \
+hts_Stats --version ; \
+treetime --version ; \
+# RUN FastTree
+# RUN phyml --version
+raxmlHPC -v ; \
+raxml-ng --version ; \
+samtools  --version ; \
+bcftools  --version ; \
+bamtools --version ; \
+vcftools --version ; \
+bedtools --version ; \
+deeptools --version ; \
+bedops --version ; \
+spades.py --version ; \
+megahit --version ; \
+
+########################################################################################################################
+########################################################################################################################
+
 WORKDIR /root/
-RUN git clone https://github.com/bbuchfink/diamond.git
-WORKDIR /root/diamond/
-RUN mkdir bin
-WORKDIR /root/diamond/bin/
-RUN cmake .. ; make install
+
+########################################################################################################################
+########################################################################################################################
+
+
+
+
 
