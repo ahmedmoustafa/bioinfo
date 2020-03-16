@@ -499,6 +499,8 @@ RUN wget -t 0 http://cab.spbu.ru/files/release3.14.0/SPAdes-3.14.0-Linux.tar.gz 
 # Showing versions
 # ################
 
+# Showing versions
+# ################
 RUN python3.7 --version ; \
 blastn -version ; \
 diamond --version ; \
@@ -525,6 +527,8 @@ deeptools --version ; \
 bedops --version ; \
 spades.py --version ; \
 megahit --version ; \
+spades.py --version
+
 
 ########################################################################################################################
 ########################################################################################################################
