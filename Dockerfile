@@ -498,7 +498,7 @@ mv prodigal.linux /usr/local/bin/prodigal
 
 # DeepBGC
 #########
-WORKDIR /root/
+# WORKDIR /root/
 Run pip install deepbgc ; \
 deepbgc download ; \
 pip install deepbgc[hmm]
@@ -517,55 +517,29 @@ RUN ./configure ; make ; make install
 ########
 ########
 
+WORKDIR /tmp/setup/
+
 # DIAMOND
 #########
-WORKDIR /tmp/setup/
 RUN wget -t 0 http://github.com/bbuchfink/diamond/releases/download/v0.9.30/diamond-linux64.tar.gz ; \
 tar zxvf diamond-linux64.tar.gz ; \
 mv diamond /usr/local/bin/
 
-########################################################################################################################
-########################################################################################################################
+# Bioconda
+##########
+RUN wget -t 0 https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh ; \
+sh Miniconda3-latest-Linux-x86_64.sh -b  -p /usr/local/miniconda3 ; \
+export PATH=$PATH:/usr/local/miniconda3/bin/ ; \
+conda config --add channels defaults ; \
+conda config --add channels bioconda ; \
+conda config --add channels conda-forge
 
-# Showing versions
-# ################
-
-# Showing versions
-# ################
-RUN python3.7 --version ; \
-blastn -version ; \
-diamond --version ; \
-muscle -version ; \
-mafft --version ; \
-tophat --version ; \
-hisat2 --version ; \
-bowtie2 --version ; \
-STAR --version ; \
-salmon --version ; \
-bbmap.sh --version ; \
-hts_Stats --version ; \
-treetime --version ; \
-# RUN FastTree
-# RUN phyml --version
-raxmlHPC -v ; \
-raxml-ng --version ; \
-samtools  --version ; \
-bcftools  --version ; \
-bamtools --version ; \
-vcftools --version ; \
-bedtools --version ; \
-deeptools --version ; \
-bedops --version ; \
-spades.py --version ; \
-megahit --version ; \
-spades.py --version ; \
-deepbgc info
-
+# Docker
+########
+# RUN wget -t 0 https://get.docker.com/ -O docker.sh ; \
+# sh docker.sh 
 
 ########################################################################################################################
 ########################################################################################################################
 
 WORKDIR /root/
-
-
-
