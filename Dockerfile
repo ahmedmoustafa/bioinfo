@@ -303,3 +303,77 @@ RUN mv bbmap/* /usr/local/bin/
 
 ########################################################################################################################
 ########################################################################################################################
+
+# BAM Processing
+################
+################
+
+# HTSlib
+########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/samtools/htslib.git
+WORKDIR /tmp/setup/htslib
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+# Samtools
+##########
+WORKDIR /tmp/setup/
+RUN git clone git://github.com/samtools/samtools.git
+WORKDIR /tmp/setup/samtools
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+# Bcftools
+##########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/samtools/bcftools.git
+WORKDIR /tmp/setup/bcftools
+RUN autoheader ; autoconf ; ./configure ; make ; make install
+
+
+# Bamtools
+##########
+WORKDIR /tmp/setup/
+RUN git clone git://github.com/pezmaster31/bamtools.git
+WORKDIR /tmp/setup/bamtools
+RUN mkdir build
+WORKDIR /tmp/setup/bamtools/build
+RUN cmake .. ; make ; make install
+
+# VCFtools
+##########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/vcftools/vcftools.git
+WORKDIR /tmp/setup/vcftools
+RUN ./autogen.sh ; ./configure ; make ; make install
+
+# Bedtools
+##########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/arq5x/bedtools2.git
+WORKDIR /tmp/setup/bedtools2
+RUN make ; make install
+
+# deepTools
+###########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/deeptools/deepTools
+WORKDIR /tmp/setup/deepTools
+RUN python setup.py install
+
+# BEDOPS
+########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/bedops/bedops.git
+WORKDIR /tmp/setup/bedops
+RUN make ; make install ; mv ./bin/* /usr/local/bin/
+
+# SAMBAMBA
+##########
+WORKDIR /tmp/setup/
+RUN git clone --recursive https://github.com/biod/sambamba.git
+WORKDIR /tmp/setup/sambamba
+RUN make ; mv sambamba /usr/local/bin/
+
+########################################################################################################################
+########################################################################################################################
+
