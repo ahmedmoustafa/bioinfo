@@ -1,3 +1,5 @@
+#!/bin/sh
+
 apt-get -y install apt-utils \
 dialog \
 software-properties-common \
