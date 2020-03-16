@@ -493,12 +493,15 @@ RUN sh ./autogen.sh; ./configure ; make ; make install
 # Prodigal
 ##########
 WORKDIR /tmp/setup/
-RUN wget -t 0 https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux ; mv prodigal.linux /usr/local/bin/prodigal
+RUN wget -t 0 https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux ; \
+mv prodigal.linux /usr/local/bin/prodigal
 
 # DeepBGC
 #########
 WORKDIR /root/
-Run pip install deepbgc ; deepbgc download
+Run pip install deepbgc ; \
+deepbgc download ; \
+pip install deepbgc[hmm]
 
 # Infernal
 ##########
@@ -523,8 +526,6 @@ mv diamond /usr/local/bin/
 
 ########################################################################################################################
 ########################################################################################################################
-
-RUN pip install deepbgc[hmm]
 
 # Showing versions
 # ################
@@ -565,11 +566,6 @@ deepbgc info
 ########################################################################################################################
 
 WORKDIR /root/
-
-########################################################################################################################
-########################################################################################################################
-
-
 
 
 
