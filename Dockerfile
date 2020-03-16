@@ -381,6 +381,12 @@ RUN make ; mv sambamba /usr/local/bin/
 ############
 ############
 
+# SPAdes
+########
+RUN wget -t 0 http://cab.spbu.ru/files/release3.14.0/SPAdes-3.14.0-Linux.tar.gz ; \
+tar zxvf SPAdes-3.14.0-Linux.tar.gz ; \
+mv SPAdes-3.14.0-Linux/bin/* /usr/local/bin/ ; \
+mv SPAdes-3.14.0-Linux/share/* /usr/local/share/
 
 # ABySS
 #######
@@ -480,21 +486,45 @@ RUN sh ./autogen.sh; ./configure ; make ; make install
 ########################################################################################################################
 ########################################################################################################################
 
+# Gene Prediction
+#################
+#################
+
+# Prodigal
+##########
+WORKDIR /tmp/setup/
+RUN wget -t 0 https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.linux ; mv prodigal.linux /usr/local/bin/prodigal
+
+# DeepBGC
+#########
+WORKDIR /root/
+Run pip install deepbgc ; deepbgc download
+
+# Infernal
+##########
+WORKDIR /tmp/setup/
+RUN wget -t 0 http://eddylab.org/infernal/infernal-1.1.3.tar.gz ; tar zxvf infernal-1.1.3.tar.gz
+WORKDIR /tmp/setup/infernal-1.1.3/
+RUN ./configure ; make ; make install
+
+########################################################################################################################
+########################################################################################################################
 
 # Others
 ########
 ########
 
-
+# DIAMOND
+#########
 WORKDIR /tmp/setup/
-
-RUN wget -t 0 http://github.com/bbuchfink/diamond/releases/download/v0.9.30/diamond-linux64.tar.gz ; tar zxvf diamond-linux64.tar.gz ; mv diamond /usr/local/bin/
-
-RUN wget -t 0 http://cab.spbu.ru/files/release3.14.0/SPAdes-3.14.0-Linux.tar.gz ; tar zxvf SPAdes-3.14.0-Linux.tar.gz ; mv SPAdes-3.14.0-Linux/bin/* /usr/local/bin/ ; mv SPAdes-3.14.0-Linux/share/* /usr/local/share/
-
+RUN wget -t 0 http://github.com/bbuchfink/diamond/releases/download/v0.9.30/diamond-linux64.tar.gz ; \
+tar zxvf diamond-linux64.tar.gz ; \
+mv diamond /usr/local/bin/
 
 ########################################################################################################################
 ########################################################################################################################
+
+RUN pip install deepbgc[hmm]
 
 # Showing versions
 # ################
@@ -527,7 +557,8 @@ deeptools --version ; \
 bedops --version ; \
 spades.py --version ; \
 megahit --version ; \
-spades.py --version
+spades.py --version ; \
+deepbgc info
 
 
 ########################################################################################################################
