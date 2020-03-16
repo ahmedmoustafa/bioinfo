@@ -377,3 +377,50 @@ RUN make ; mv sambamba /usr/local/bin/
 ########################################################################################################################
 ########################################################################################################################
 
+# Assemblers
+############
+############
+
+
+# ABySS
+#######
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/sparsehash/sparsehash.git
+WORKDIR /tmp/setup/sparsehash
+RUN ./autogen.sh ; ./configure ; make ; make install
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/bcgsc/abyss.git
+WORKDIR /tmp/setup/abyss
+RUN ./autogen.sh ; ./configure ; make ; make install
+
+
+# Velvet
+########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/dzerbino/velvet.git
+WORKDIR /tmp/setup/velvet/
+RUN make ; mv velvet* /usr/local/bin/
+
+
+# MEGAHIT
+#########
+WORKDIR /tmp/setup/
+RUN git clone https://github.com/voutcn/megahit.git
+WORKDIR /tmp/setup/megahit
+RUN git submodule update --init
+RUN mkdir build
+WORKDIR /tmp/setup/megahit/build
+RUN cmake .. -DCMAKE_BUILD_TYPE=Release ; make -j4 ; make simple_test  ; make install
+
+
+# MetaVelvet
+############
+WORKDIR /tmp/setup/
+RUN git clone git://github.com/hacchy/MetaVelvet.git
+WORKDIR /tmp/setup/MetaVelvet
+RUN make ; mv meta-velvetg /usr/local/bin/
+
+
+########################################################################################################################
+########################################################################################################################
+
